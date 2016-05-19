@@ -33,8 +33,8 @@ class User {
             }
             return -1;
         }
-		catch (Exception $e) {
-            echo $e->getMessage();
+        catch (Exception $e) {
+                echo $e->getMessage();
         }
         return -1;
     }
