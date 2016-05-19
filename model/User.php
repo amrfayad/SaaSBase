@@ -1,7 +1,6 @@
 <?php
 /*
 
-
  desc users;
 +-----------------------+--------------+------+-----+---------+----------------+
 | Field                 | Type         | Null | Key | Default | Extra          |
@@ -37,5 +36,30 @@ class User {
             echo $e->getMessage();
         }
         return -1;
+    }
+
+    //check on user email and password + get user id
+
+    function getUserId($email,$password)
+    {
+        try{
+                $connection = Database::connect();
+                if(!$connection){
+                    die('Error In DbConnection:' .mysqli_connect_error());
+                }
+
+                $query = "select user_id from users where user_email='$email' and password='$password'";
+                $result = mysqli_query($connection,$query);
+                while($user = mysqli_fetch_assoc($result))
+                {
+                    return $user['user_id'];
+                }
+        }
+        catch (Exception $ex)
+        {
+            echo $ex->getMessage();
+        }
+        return -1 ;
+
     }
 }
