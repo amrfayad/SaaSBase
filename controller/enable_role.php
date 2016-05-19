@@ -8,12 +8,11 @@ $role_obj = new Role();
 
 if($role_obj->checkOnRole($role_name) == 1){
 
-    $role = $role_obj->disableRole($role_name);
+    $role = $role_obj->enableRole($role_name);
     if($role == 1)
     {
-        echo "Role Is Disabled Successfully";
+        echo "Role Is Enabled Successfully";
     }
 }else{
-    echo "Error in Disable Role";
+    echo "Error in Enable Role";
 }
-
