@@ -40,8 +40,6 @@ class User {
         }
         return -1;
     }
-
-
     function check_mail($email)
     {
         try {
@@ -75,8 +73,6 @@ class User {
             echo $e->getMessage();
         }
     }
-
-
     function admin_id($admin_email){
         try{
             $connection=Database::connect();
@@ -131,8 +127,6 @@ class User {
             echo $e->getMessage();
         }
     }
-
-
     function getUserId($email, $password) {
         try {
             $conection = Database::connect();
@@ -149,12 +143,11 @@ class User {
             echo $ex->getMessage();
         }
     }
-
     function CheckMail($email) {
         try {
             $conection = Database::connect();
             if (!$conection) {
-                die('Error in connection  return user id');
+                die('Error in connection return user id');
             }
             $query = "SELECT * FROM users where user_email='" . $email . "'";
             $result = mysqli_query($conection, $query);
@@ -167,7 +160,6 @@ class User {
             echo $ex->getMessage();
         }
     }
-
     function getUserProfile($user_id)
     {
         try {
@@ -184,6 +176,23 @@ class User {
            catch (Exception $ex) {
             echo $ex->getMessage();
         } 
+    }
+    function set_token($email){
+        try {
+            $connection = Database::connect();
+            if (!$connection) {
+                die('Error in connection  return user id');
+            }
+            $length =78;
+            $token =bin2hex(random_bytes($length));
+            $query ='INSERT INTO `users`(`reset_password_token`)VALUES("'.$token.'")';
+            $insert_result = mysqli_query($connection, $query);
+            $return = mysqli_fetch_assoc($insert_result);
+            return $return;
+        }
+            catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
     }
 }
 

@@ -15,7 +15,6 @@
         $is_email_exists = $user->check_mail($emails[$counter]);
         if($is_email_exists==0){
             $json['admin_email']=$admin_email;
-//            $json['id']=$admin_id;
             $json['team_id']=$team_id;
             $json['invited_email']=$emails[$counter];
             $json['Status']="Sign up";
@@ -23,7 +22,6 @@
         }
         else{
             $json['admin_email']=$admin_email;
-//            $json['id']=$admin_id;
             $json['team_id']=$team_id;
             $json['invited_email']=$emails[$counter];
             $json['Status']="Log in";
