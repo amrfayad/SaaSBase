@@ -47,7 +47,7 @@ class User {
     {
         try {
             $connection = Database::connect();
-            if (!connection) {
+            if (!$connection) {
                 die('Error:' . mysqli_connect_error());
             }
             $query = "select user_id from users where user_email='$email'";
@@ -81,7 +81,7 @@ class User {
     function admin_id($admin_email){
         try{
             $connection=Database::connect();
-            if(!connection){die('Error:'.mysqli_connect_error());}
+            if(!$connection){die('Error:'.mysqli_connect_error());}
 
             $query="select user_id from users where user_email='$admin_email'";
             $admin_id=mysqli_fetch_assoc(mysqli_query($connection,$query));
@@ -136,12 +136,12 @@ class User {
 
     function getUserId($email, $password) {
         try {
-            $conection = Database::connect();
-            if (!$conection) {
+            $connection = Database::connect();
+            if (!$connection) {
                 die('Error in connection  return user id');
             }
             $query = "select user_id from users where user_email='$email' and password='$password'";
-            $result = mysqli_query($conection, $query);
+            $result = mysqli_query($connection, $query);
             while ($row = mysqli_fetch_assoc($result)) {
                 return $row['user_id'];
             }
