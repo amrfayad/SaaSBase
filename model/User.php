@@ -1,7 +1,6 @@
 <?php
 
 /*
-
   desc users;
   +-----------------------+--------------+------+-----+---------+----------------+
   | Field                 | Type         | Null | Key | Default | Extra          |
@@ -15,7 +14,6 @@
   | user_profile_info     | longtext     | YES  |     | NULL    |                |
   +-----------------------+--------------+------+-----+---------+----------------+
   7 rows in set (0.01 sec)
-
  */
 
 include_once 'Database.php';
@@ -55,7 +53,10 @@ class User {
             } else {
                 return 0;
             }
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
+
         }
     }
     function signUp($name, $email, $pass) {
@@ -110,19 +111,16 @@ class User {
             echo $e->getMessage();
         }
     }
-    function invite($email,$admin_id){
+    function invite($email){
         try{
             $connection=Database::connect();
             if(!connection){die('Error:'.mysqli_connect_error());}
-
         $query="select user_name from users where user_email='$email'";
         $names=mysqli_query($connection,$query);
-            #$query2 ="select team_id from users_in_teams where users_user_id='$admin_id'" ;
-            #$team_id= mysqli_fetch_assoc(mysqli_query($connection.$$query2));
         while($name = mysqli_fetch_assoc($names)){
-        return "Login Form".$name; #.$team_name;
+        return "Login Form".$name;
         }
-        return "Sign up Form";#.$team_name;
+        return "Sign up Form";
         }
         catch (Exception $e) {
             echo $e->getMessage();
@@ -178,18 +176,17 @@ class User {
             echo $ex->getMessage();
         } 
     }
-    function set_token($email){
+    function set_token($email,$date,$token){
         try {
             $connection = Database::connect();
             if (!$connection) {
                 die('Error in connection  return user id');
             }
-            $length =78;
-            $token =bin2hex(random_bytes($length));
-            $query ='INSERT INTO `users`(`reset_password_token`)VALUES("'.$token.'")';
-            $insert_result = mysqli_query($connection, $query);
-            $return = mysqli_fetch_assoc($insert_result);
-            return $return;
+            $query ="update  users set reset_password_token = '$token',".
+                    " token_expiration_date = '$date'".
+                    "WHERE user_email = '$email'";
+            $result = mysqli_query($connection, $query);
+            return $result;
         }
             catch (Exception $ex) {
             echo $ex->getMessage();
