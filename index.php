@@ -13,6 +13,7 @@ if(null !== filter_input(INPUT_POST, 'hash') && null !== filter_input(INPUT_POST
     else
     {
         header("Bad Request", true, 400 );
+		echo 'Test';
     }
 }
 else
