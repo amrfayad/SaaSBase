@@ -19,7 +19,7 @@
 include_once 'Database.php';
 include_once 'Team.php';
 class User {
-
+    
     function login($email, $passwd) {
         try {
             $conection = Database::connect();
@@ -58,7 +58,7 @@ class User {
         {
 
         }
-    }
+    } #AyaEMahmoud
     function signUp($name, $email, $pass) {
 
         try {
@@ -92,7 +92,7 @@ class User {
         catch (Exception $e) {
             echo $e->getMessage();
         }
-    }
+    } #AyaEMahmoud
     function team_id($admin_id){
         try{
             $connection=Database::connect();
@@ -110,7 +110,7 @@ class User {
         catch (Exception $e) {
             echo $e->getMessage();
         }
-    }
+    } #AyaEMahmoud
     function invite($email){
         try{
             $connection=Database::connect();
@@ -125,7 +125,7 @@ class User {
         catch (Exception $e) {
             echo $e->getMessage();
         }
-    }
+    } #AyaEMahmoud
     function getUserId($email, $password) {
         try {
             $conection = Database::connect();
@@ -191,6 +191,6 @@ class User {
             catch (Exception $ex) {
             echo $ex->getMessage();
         }
-    }
+    } #AyaEMahmoud
 }
 
