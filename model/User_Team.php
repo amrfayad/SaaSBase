@@ -83,4 +83,23 @@ class User_Team
         }
         return -1;
     }
+    
+    
+    
+    function addUser($user_id,$team_id)
+    {
+        try {
+
+            $conection = Database::connect();
+            if (!$conection) {
+                die('Error in connection  userCreate');
+            }
+
+            $query = "insert into users_in_teams(users_user_id,teams_team_id) values (" . $user_id . "," . $team_id . ")";
+            $result = mysqli_query($conection, $query);
+        } catch (Exception $e) {
+
+            echo $e->getMessage();
+        }
+    }
 }
