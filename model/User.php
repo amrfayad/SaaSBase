@@ -20,7 +20,6 @@
 
 include_once 'Database.php';
 include_once 'Team.php';
-
 class User {
 
     function login($email, $passwd) {
@@ -35,9 +34,11 @@ class User {
                 return $row;
             }
             return -1;
-        } catch (Exception $e) {
-            echo $e->getMessage();
         }
+        catch (Exception $e) {
+                echo $e->getMessage();
+        }
+	
         return -1;
     }
     function check_mail($email)
