@@ -21,7 +21,6 @@
 include_once 'Database.php';
 include_once 'Team.php';
 class User {
-
     function login($email, $passwd) {
         try {
             $conection = Database::connect();
@@ -38,11 +37,8 @@ class User {
         catch (Exception $e) {
                 echo $e->getMessage();
         }
-	
-        return -1;
+	return -1;
     }
-
-
     function check_mail($email)
     {
         try {
@@ -133,7 +129,6 @@ class User {
         }
     }
 
-
     function getUserId($email, $password) {
         try {
             $conection = Database::connect();
@@ -162,13 +157,13 @@ class User {
             $num_rows = mysqli_num_rows($result);
             if ($num_rows >= 1) {
                 return 1;
-            } else
+            } else{
                 return -1;
+            }
         } catch (Exception $ex) {
             echo $ex->getMessage();
         }
     }
-
     function getUserProfile($user_id)
     {
         try {
@@ -185,6 +180,24 @@ class User {
            catch (Exception $ex) {
             echo $ex->getMessage();
         } 
+    }
+    function checkTeamAdminPassword($admin_id,$admin_password){
+        try {
+            $conection = Database::connect();
+            if (!$conection) {
+                die('Error: ' . mysqli_connect_error());
+            }
+            $query = "select * from users where user_id = $admin_id and password = '$admin_password'";
+            $result = mysqli_query($conection, $query);
+            $row = mysqli_fetch_assoc($result);
+            if($row) {
+                return 1;
+            }
+            return -1;
+        }
+        catch (Exception $e) {
+                return $e->getMessage();
+        }
     }
 }
 

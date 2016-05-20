@@ -46,15 +46,16 @@ class User_Team
     }
  public function assign_role($team_id,$user_id,$role_id)
     {
-        try
+     try
         {
             $conection = Database::connect();
             if (!$conection) {
                 die('Error: ' . mysqli_connect_error());
             }
             $query = "update users_in_teams set role_role_id = $role_id "
-                    . "where  teams_team_id = $team_id and  users_user_id = $user_id";
+                    . "where teams_team_id = $team_id and  users_user_id = $user_id ";
             $result = mysqli_query($conection, $query);
+            
             return $result ;
         }
         catch (Exception $e)
@@ -73,7 +74,8 @@ class User_Team
             $query = "select users_user_id from users_in_teams"
                     . " where teams_team_id = $team_id and role_role_id = $billing_role_id ";
             $result = mysqli_query($conection, $query);
-            return $result ;
+            $row = $row = mysqli_fetch_assoc($result);
+            return $row['users_user_id'] ;
         }
         catch (Exception $e)
         {
