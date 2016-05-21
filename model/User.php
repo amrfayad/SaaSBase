@@ -65,7 +65,7 @@ class User {
             }
 
             $query = "insert into users(user_name,user_email,password) values ('" . $name . "','" . $email . "','" . $pass . "')";
-            $result = mysqli_query($conection, $query);
+            mysqli_query($conection, $query);
         } catch (Exception $e) {
 
             echo $e->getMessage();

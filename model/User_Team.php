@@ -96,7 +96,7 @@ class User_Team
             }
 
             $query = "insert into users_in_teams(users_user_id,teams_team_id) values (" . $user_id . "," . $team_id . ")";
-            $result = mysqli_query($conection, $query);
+            mysqli_query($conection, $query);
         } catch (Exception $e) {
 
             echo $e->getMessage();
