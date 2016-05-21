@@ -1,5 +1,4 @@
 <?php
-
 /*
   desc users;
   +-----------------------+--------------+------+-----+---------+----------------+
@@ -15,11 +14,9 @@
   +-----------------------+--------------+------+-----+---------+----------------+
   7 rows in set (0.01 sec)
  */
-
 include_once 'Database.php';
 include_once 'Team.php';
 class User {
-    
     function login($email, $passwd) {
         try {
             $conection = Database::connect();
@@ -36,8 +33,7 @@ class User {
         catch (Exception $e) {
                 echo $e->getMessage();
         }
-	
-        return -1;
+	return -1;
     }
     function check_mail($email)
     {
@@ -125,8 +121,9 @@ class User {
         catch (Exception $e) {
             echo $e->getMessage();
         }
-    } #AyaEMahmoud
-    function getUserId($email, $password) {
+ }
+    #AyaEMahmoud
+	function getUserId($email, $password) {
         try {
             $connection = Database::connect();
             if (!$connection) {
@@ -153,8 +150,9 @@ class User {
             $num_rows = mysqli_num_rows($result);
             if ($num_rows >= 1) {
                 return 1;
-            } else
+            } else{
                 return -1;
+            }
         } catch (Exception $ex) {
             echo $ex->getMessage();
         }
@@ -175,6 +173,24 @@ class User {
            catch (Exception $ex) {
             echo $ex->getMessage();
         } 
+    }
+    function checkTeamAdminPassword($admin_id,$admin_password){
+        try {
+            $conection = Database::connect();
+            if (!$conection) {
+                die('Error: ' . mysqli_connect_error());
+            }
+            $query = "select * from users where user_id = $admin_id and password = '$admin_password'";
+            $result = mysqli_query($conection, $query);
+            $row = mysqli_fetch_assoc($result);
+            if($row) {
+                return 1;
+            }
+            return -1;
+        }
+        catch (Exception $e) {
+                return $e->getMessage();
+        }
     }
     function set_token($email,$date,$token){
         try {
