@@ -1,5 +1,5 @@
 <?php
 interface DataBaseStrategy
 {
-    public  function connect();
+    public function connect();
 }
