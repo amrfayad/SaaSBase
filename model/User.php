@@ -216,7 +216,7 @@ class User {
             }
             $query ="select token_expiration_date from users WHERE reset_password_token = '$token'";
             $return_expiration_date =mysqli_fetch_assoc(mysqli_query($connection, $query));
-            return $return_expiration_date;
+            return $return_expiration_date['token_expiration_date'];
         }
         catch (Exception $ex) {
             echo $ex->getMessage();
@@ -230,7 +230,7 @@ class User {
             }
             $query ="select password from users WHERE user_email = '$email'";
             $password =mysqli_fetch_assoc(mysqli_query($connection, $query));
-            return $password;
+            return $password['password'];
         }
         catch (Exception $ex) {
             echo $ex->getMessage();
@@ -242,8 +242,8 @@ class User {
             if (!$connection) {
                 die('Error in connection  return user id');
             }
-            $query ="update  users set password = '$password',".
-                    "WHERE user_email = '$email'";
+            $query ="update  users set password = '$password'".
+                    " WHERE user_email = '$email'";
             $result = mysqli_query($connection, $query);
             return $result;
         }

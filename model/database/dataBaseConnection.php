@@ -26,7 +26,11 @@
  <?php
 	include_once 'dataBaseConnection.php';
 	include_once 'mySqlDatabase.php';
-	
+
+include_once './database/dataBaseConnection.php';
+include_once './database/mySqlDatabase.php';
+
+
 	$db1 = new DataBaseConnection(mySqlDatabase::getInstance());
 	$conection = $db1->getConnection();
 

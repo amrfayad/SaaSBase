@@ -36,7 +36,7 @@ class Role
             }
 
                 //insert into role table
-                $query = "INSERT INTO role(role_name) VALUES ('$role_name')";
+                $query = "INSERT INTO role(role_name,role_status) VALUES ('$role_name',1)";
                 $result = mysqli_query($connection,$query);
                 if($result != NULL){
                     return 1;
