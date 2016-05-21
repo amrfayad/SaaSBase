@@ -1,6 +1,6 @@
 <?php
 include_once './model/User.php';
-
+#AyaEMahmoud
 $email=$data['email'];
 $user = new User();
 $error_massage="Email Does't Exist!";
@@ -12,7 +12,8 @@ if($is_email_exists){
     #Increase date by one day and format it to Y-m-d H:i:s format
     $result = $user->set_token($email,$date,$token); #Insert Token and date in DB
     if($result==1){
-    print_r($token );}
+        $URL="http://localhost/forgot_password.php?".$token;
+    print_r($URL);}
 }
 else{
     print_r($error_massage);

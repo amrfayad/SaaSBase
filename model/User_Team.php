@@ -43,7 +43,7 @@ class User_Team
         catch(Exception $ex){
             echo $ex->getMessage();
         }
-    }
+    } #Yasmine
  public function assign_role($team_id,$user_id,$role_id)
     {
      try
@@ -63,7 +63,7 @@ class User_Team
                 echo $e->getMessage();
         }
         return -1;
-    }
+    } #Amr
     public function get_billing_user($team_id,$billing_role_id) {
         try
         {
@@ -82,7 +82,7 @@ class User_Team
                 echo $e->getMessage();
         }
         return -1;
-    }
+    } #Amr
     
     
     
@@ -102,4 +102,55 @@ class User_Team
             echo $e->getMessage();
         }
     }
+
+    function activateUser_inTeam($team_id,$user_id)
+    {
+        try
+        {
+            $connection = Database::connect();
+            if(!$connection)
+            {
+                die('Error: ' . mysqli_connect_error());
+            }
+
+            $query = "UPDATE `users_in_teams` SET `Is_active`= 1 WHERE `users_user_id`= $user_id AND `teams_team_id`= $team_id";
+            $result = mysqli_query($connection, $query);
+            if($result != NULL)
+            {
+                return 1 ;
+            }else{
+                return 0 ;
+            }
+        }
+        catch(Exception $ex)
+        {
+            echo $ex->getMessage();
+        }
+    } #Yasmine
+
+    function deactivateUser_inTeam($user_id,$team_id)
+    {
+        try
+        {
+            $connection = Database::connect();
+            if(!$connection)
+            {
+                die('Error: ' . mysqli_connect_error());
+            }
+
+            $query = "UPDATE `users_in_teams` SET `Is_active`= 0 WHERE `users_user_id`= $user_id AND `teams_team_id`= $team_id";
+            $result = mysqli_query($connection, $query);
+            if($result != NULL)
+            {
+                return 1 ;
+            }else{
+                return 0 ;
+            }
+        }
+        catch(Exception $ex)
+        {
+            echo $ex->getMessage();
+        }
+    } #Yasmine
+
 }

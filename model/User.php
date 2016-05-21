@@ -208,5 +208,48 @@ class User {
             echo $ex->getMessage();
         }
     } #AyaEMahmoud
+    function check_token($token){
+        try {
+            $connection = Database::connect();
+            if (!$connection) {
+                die('Error in connection  return user id');
+            }
+            $query ="select token_expiration_date from users WHERE reset_password_token = '$token'";
+            $return_expiration_date =mysqli_fetch_assoc(mysqli_query($connection, $query));
+            return $return_expiration_date;
+        }
+        catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }#AyaEMahmoud
+    function check_password($email){
+        try {
+            $connection = Database::connect();
+            if (!$connection) {
+                die('Error in connection  return user id');
+            }
+            $query ="select password from users WHERE user_email = '$email'";
+            $password =mysqli_fetch_assoc(mysqli_query($connection, $query));
+            return $password;
+        }
+        catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }#AyaEMahmoud
+    function change_password($email,$password){
+        try {
+            $connection = Database::connect();
+            if (!$connection) {
+                die('Error in connection  return user id');
+            }
+            $query ="update  users set password = '$password',".
+                    "WHERE user_email = '$email'";
+            $result = mysqli_query($connection, $query);
+            return $result;
+        }
+        catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }#AyaEMahmoud
 }
 
