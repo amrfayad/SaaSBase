@@ -2,9 +2,13 @@
 #AyaEMahmoud
     include_once './model/User.php';
     $admin_email=$data['admin_email'];
+    $admin_password=$data['admin_password'];
     $invited_emails = $data['invited_emails'];
     $emails = explode("\n", $invited_emails);
     $user = new User();
+    $is_admin=$user->check_admin($admin_email,$admin_password);
+
+    if($is_admin){
     $admin_id = $user->admin_id($admin_email);
     $team_id = $user->team_id($admin_id);
     $counter=0;
@@ -28,4 +32,9 @@
         $counter++;
 }
     echo json_encode($list_of_invites);
-?>
+
+    }
+
+else{
+    print_r("Error In Admin Information");
+}

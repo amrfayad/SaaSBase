@@ -222,6 +222,20 @@ class User {
             echo $ex->getMessage();
         }
     }#AyaEMahmoud
+    function check_admin($admin_email,$admin_password){
+        try {
+            $connection = Database::connect();
+            if (!$connection) {
+                die('Error in connection  return user id');
+            }
+            $query ="select user_name from users WHERE user_email= '$admin_email' And password='$admin_password'";
+            $return = mysqli_query($connection, $query);
+            return $return;
+        }
+        catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }#AyaEMahmoud
     function check_password($email){
         try {
             $connection = Database::connect();
