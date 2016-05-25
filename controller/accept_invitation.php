@@ -2,9 +2,9 @@
 
 include_once './model/User.php';
 include_once './model/User_Team.php';
-$user_email = $_POST['data']['email'];
-$user_password = $_POST['data']['pass'];
-$team_id = $_POST['data']['team_id'];
+$user_email = $data['email'];
+$user_password = $data['pass'];
+$team_id = $data['team_id'];
 
 //get user id
 $user = new User();

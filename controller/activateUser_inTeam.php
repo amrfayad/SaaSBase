@@ -4,11 +4,11 @@ include_once './model/User_Team.php';
 include_once './model/User.php';
 
 
-$user_id = $_POST['data']['user_id'];
-$team_id = $_POST['data']['team_id'];
+$user_id = $data['user_id'];
+$team_id = $data['team_id'];
 
-$admin_id = $_POST['data']['admin_id'];
-$admin_password = $_POST['data']['password'];
+$admin_id = $data['admin_id'];
+$admin_password = $data['password'];
 
 $admin_obj = new User();
 

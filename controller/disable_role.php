@@ -2,7 +2,7 @@
 
 include_once './model/Role.php';
 
-$role_name = $_POST['data']['role_name'];
+$role_name = $data['role_name'];
 
 $role_obj = new Role();
 
