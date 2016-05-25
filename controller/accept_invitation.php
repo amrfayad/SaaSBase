@@ -17,7 +17,10 @@ if($user_id == -1)
     echo "Invalid Email or Password";
 }else{
     $user_team = new User_Team();
-    $logedUser = $user_team->accept_invitation($user_id,$team_id);
+    if($user_team->accept_invitation($user_id,$team_id) == 1)
+    {
+        echo "Thank You For Accept The Invitation";
+    }
 }
 
 
