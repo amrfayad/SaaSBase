@@ -36,10 +36,10 @@ class Team {
                 die('Error: in connection Team');
             }
             $query = "select team_id from teams where users_user_id=$admin_id";
-           // echo $query; exit;
+            //echo $query; exit;
             $result = mysqli_query($conection, $query);
               while ($row = mysqli_fetch_assoc($result)) {
-                return $row;
+                return $row['team_id'];
             }
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -91,5 +91,28 @@ class Team {
             return $e->getMessage();
         }
     }
+
+//function take admin email and return its ID
+  function getAdminId($email){
+
+ try {
+            $conection = Database::connect();
+            if (!$conection) {
+                die('Error: in connection');
+            }
+            $query = 'select user_id from users where user_email ="'. $email.'"';
+            $result = mysqli_query($conection, $query);
+            $row = mysqli_fetch_assoc($result);
+            if ($row) {
+                return $row['user_id'];
+            }
+            else
+            {
+                return -1;
+            }
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+  }  
 
 }
