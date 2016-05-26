@@ -1,6 +1,6 @@
 <?php
 #AyaEMahmoud
-    include_once './model/User.php';
+    include_once './models/User.php';
     $admin_email=$data['admin_email'];
     $admin_password=$data['admin_password'];
     $invited_emails = $data['invited_emails'];

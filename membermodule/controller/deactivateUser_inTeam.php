@@ -1,7 +1,7 @@
 <?php
 
-include_once './model/User_Team.php';
-include_once './model/User.php';
+include_once './models/User_Team.php';
+include_once './models/User.php';
 
 
 $user_id = $data['user_id'];

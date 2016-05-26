@@ -1,5 +1,5 @@
 <?php
-include_once './model/User.php';
+include_once './models/User.php';
 #AyaEMahmoud
 $user = new User();
 

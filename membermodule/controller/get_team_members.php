@@ -1,5 +1,5 @@
 <?php
-include_once '../model/User.php';
+include_once '../models/User.php';
 $team = new Team();
 $team_id=$team->getTeams(8);
 echo json_encode($team_id);
