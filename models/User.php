@@ -222,6 +222,21 @@ class User {
             echo $ex->getMessage();
         }
     }#AyaEMahmoud
+    function get_token($email){
+        try {
+            $connection = Database::connect();
+            if (!$connection) {
+                die('Error in connection  return user id');
+            }
+            $query ="select reset_password_token from users WHERE user_email = '$email'";
+            $return_token =mysqli_fetch_assoc(mysqli_query($connection, $query));
+            return $return_token['reset_password_token'];
+        }
+        catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }#AyaEMahmoud
+
     function check_admin($admin_email,$admin_password){
         try {
             $connection = Database::connect();
@@ -243,7 +258,10 @@ class User {
                 die('Error in connection  return user id');
             }
             $query ="select password from users WHERE user_email = '$email'";
+            $query2 ="update  users set reset_password_token = ''".
+                    " WHERE user_email = '$email'";
             $password =mysqli_fetch_assoc(mysqli_query($connection, $query));
+            mysqli_query($connection, $query2);
             return $password['password'];
         }
         catch (Exception $ex) {
