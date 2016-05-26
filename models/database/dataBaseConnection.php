@@ -1,27 +1,20 @@
 <?php
-	class DataBaseConnection{
-        private $dbConnection;
-        private $num ;
-       
-        public function __construct($dbConnection) {
-            $this->dbConnection = $dbConnection;
-        }
-		
-		
-        public function getConnection()
-		{
-			return $this->dbConnection->getConnection();
-		}
-		public function setnum($num){
-			$this->num = $num ;
-			
-		}
-		public function getnum(){
-			return $this->num;
-			
-		}
-		
+
+class DataBaseConnection {
+
+    private $dbConnection;
+    private $num;
+
+    public function __construct($dbConnection) {
+        $this->dbConnection = $dbConnection;
     }
+
+    public function getConnection() {
+        return $this->dbConnection->getConnection();
+    }
+
+}
+
 /* How to test
  <?php
 	include_once 'dataBaseConnection.php';

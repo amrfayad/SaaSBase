@@ -1,9 +1,9 @@
 <?php
 
 // incude required model
-include_once './model/User.php';
-include_once './model/Team.php';
-include_once './model/User_Team.php';
+include_once './models/User.php';
+include_once './models/Team.php';
+include_once './models/User_Team.php';
 
 // fetch data from Request
 $email = $data['email'];

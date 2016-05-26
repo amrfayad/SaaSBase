@@ -1,5 +1,5 @@
 <?php
-	include_once './model/User.php';
+	include_once './models/User.php';
 	$email = $data['email'];
 	$pass = $data['pass'];
 	$user = new User();

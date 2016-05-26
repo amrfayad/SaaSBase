@@ -2,9 +2,9 @@
 
 // Include Requered Models 
 
-include_once './model/User_Team.php';
-include_once './model/User.php';
-include_once './model/Team.php';
+include_once './models/User_Team.php';
+include_once './models/User.php';
+include_once './models/Team.php';
 // Featch Post Data 
 $team_id = $data['team_id'];
 $admin_password = $data['pass'];
