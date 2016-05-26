@@ -22,8 +22,7 @@ class Team {
                 die('Error: in connection Team');
             }
             $query = "insert into teams (users_user_id) values (" . $user_id . ")";
-            //echo $query; exit;
-            $result = mysqli_query($conection, $query);
+            mysqli_query($conection, $query);
         } catch (Exception $e) {
             echo $e->getMessage();
         }

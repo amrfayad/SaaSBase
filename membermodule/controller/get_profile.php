@@ -1,5 +1,5 @@
 <?php
-include_once './model/User.php';
+include_once './models/User.php';
 $user_id=$data['user_id'];
 $user = new User();
 $userProfile=$user->getUserProfile($user_id);

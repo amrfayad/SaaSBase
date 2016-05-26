@@ -1,5 +1,5 @@
 <?php
-include_once './model/User.php';
+include_once './models/User.php';
 $team = new Team();
 if(isset($data['team_id']))
 {

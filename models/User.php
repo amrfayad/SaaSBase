@@ -65,7 +65,7 @@ class User {
             }
 
             $query = "insert into users(user_name,user_email,password) values ('" . $name . "','" . $email . "','" . $pass . "')";
-            $result = mysqli_query($conection, $query);
+            mysqli_query($conection, $query);
         } catch (Exception $e) {
 
             echo $e->getMessage();
@@ -216,7 +216,36 @@ class User {
             }
             $query ="select token_expiration_date from users WHERE reset_password_token = '$token'";
             $return_expiration_date =mysqli_fetch_assoc(mysqli_query($connection, $query));
-            return $return_expiration_date;
+            return $return_expiration_date['token_expiration_date'];
+        }
+        catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }#AyaEMahmoud
+    function get_token($email){
+        try {
+            $connection = Database::connect();
+            if (!$connection) {
+                die('Error in connection  return user id');
+            }
+            $query ="select reset_password_token from users WHERE user_email = '$email'";
+            $return_token =mysqli_fetch_assoc(mysqli_query($connection, $query));
+            return $return_token['reset_password_token'];
+        }
+        catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }#AyaEMahmoud
+
+    function check_admin($admin_email,$admin_password){
+        try {
+            $connection = Database::connect();
+            if (!$connection) {
+                die('Error in connection  return user id');
+            }
+            $query ="select user_name from users WHERE user_email= '$admin_email' And password='$admin_password'";
+            $return = mysqli_query($connection, $query);
+            return $return;
         }
         catch (Exception $ex) {
             echo $ex->getMessage();
@@ -229,8 +258,11 @@ class User {
                 die('Error in connection  return user id');
             }
             $query ="select password from users WHERE user_email = '$email'";
+            $query2 ="update  users set reset_password_token = ''".
+                    " WHERE user_email = '$email'";
             $password =mysqli_fetch_assoc(mysqli_query($connection, $query));
-            return $password;
+            mysqli_query($connection, $query2);
+            return $password['password'];
         }
         catch (Exception $ex) {
             echo $ex->getMessage();
@@ -242,8 +274,8 @@ class User {
             if (!$connection) {
                 die('Error in connection  return user id');
             }
-            $query ="update  users set password = '$password',".
-                    "WHERE user_email = '$email'";
+            $query ="update  users set password = '$password'".
+                    " WHERE user_email = '$email'";
             $result = mysqli_query($connection, $query);
             return $result;
         }

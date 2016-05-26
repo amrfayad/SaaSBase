@@ -4,7 +4,7 @@ include_once 'Database.php';
 
 class Role
 {
-    function checkOnRole($role_name)
+    function check_if_role_exist($role_name)
     {
         $connection = Database::connect();
         if(!$connection){
@@ -25,6 +25,26 @@ class Role
 
     }
 
+    function check_on_status($role_name)
+    {
+        $connection = Database::connect();
+        if(!$connection){
+            die('Error In Db Connection: ' . mysqli_connect_error());
+        }
+
+        $query = "SELECT role_status FROM role WHERE role_name = '$role_name'";
+        $result = mysqli_query($connection,$query);
+        while($role = mysqli_fetch_assoc($result))
+        {
+            if($role['role_status'] == 1)
+            {
+                return 1;
+            }else{
+                return 0;
+            }
+        }
+    }
+
 
     function addRole($role_name)
     {
@@ -36,7 +56,7 @@ class Role
             }
 
                 //insert into role table
-                $query = "INSERT INTO role(role_name) VALUES ('$role_name')";
+                $query = "INSERT INTO role(role_name,role_status) VALUES ('$role_name',1)";
                 $result = mysqli_query($connection,$query);
                 if($result != NULL){
                     return 1;
