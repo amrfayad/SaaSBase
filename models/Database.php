@@ -3,6 +3,11 @@ class Database
 {
  static function connect()
   {
-    return mysqli_connect("localhost","iti","iti","saasBase");
-  }
+    global $config;
+    return mysqli_connect(
+                $config['server'],
+                $config['username'],
+                $config['password'],
+                $config['database']);
+            }
 }

@@ -1,5 +1,5 @@
 <?php
-
+include_once './config/config.php';
 header("Access-Controll-Allow-Origin: *");   // To Accept Ajax Request
 // chek if the request paramaters is valid
 if (null !== filter_input(INPUT_GET, 'module')) {
@@ -10,7 +10,7 @@ if (null !== filter_input(INPUT_GET, 'module')) {
         // get hashed data from reaquest
         $data = json_decode(filter_input(INPUT_POST, 'data'), TRUE);
         // api key that generated  to saasAplication Developper
-        $key = 'e10adc3949ba59abbe56e057f20f883e';
+        $key = $config['key'];
         // add api key to data array
         $data['key'] = $key;
         // chek if data and hash is equevilent
