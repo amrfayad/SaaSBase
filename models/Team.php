@@ -1,14 +1,14 @@
 <?php
 /*
- 
-        +---------------+---------+------+-----+---------+-------+
-       | Field         | Type    | Null | Key | Default | Extra |
-       +---------------+---------+------+-----+---------+-------+
-       | team_id       | int(11) | NO   | PRI | NULL    |       |
-       | users_user_id | int(11) | NO   | MUL | NULL    |       |
-       +---------------+---------+------+-----+---------+-------+
-       2 rows in set (0.12 sec)
- 
+desc teams
+ +-------------------------+------------+------+-----+---------+----------------+
+| Field                   | Type       | Null | Key | Default | Extra          |
++-------------------------+------------+------+-----+---------+----------------+
+| team_id                 | int(11)    | NO   | PRI | NULL    | auto_increment |
+| users_user_id           | int(11)    | NO   | MUL | NULL    |                |
+| payment_status          | tinyint(1) | YES  |     | 0       |                |
+| subscribtions_subscr_id | int(11)    | YES  | MUL | NULL    |                |
++-------------------------+------------+------+-----+---------+----------------
  
  */
 include_once 'Database.php';
@@ -91,19 +91,19 @@ class Team {
         }
     }
 
-//function take admin email and return its ID
-  function getAdminId($email){
+ 
 
- try {
+  function getPaymentStatus($team_id){
+     try {
             $conection = Database::connect();
             if (!$conection) {
                 die('Error: in connection');
             }
-            $query = 'select user_id from users where user_email ="'. $email.'"';
+            $query = "select payment_status from teams where team_id = $team_id ";
             $result = mysqli_query($conection, $query);
             $row = mysqli_fetch_assoc($result);
             if ($row) {
-                return $row['user_id'];
+                return $row['payment_status'];
             }
             else
             {
@@ -112,6 +112,61 @@ class Team {
         } catch (Exception $e) {
             return $e->getMessage();
         }
-  }  
 
+  }
+
+
+function asignPlan($team_id,$subscr_id)
+{
+ try {
+            $conection = Database::connect();
+            if (!$conection) {
+                die('Error: in connection Team');
+            }
+            $query = "update teams set subscribtions_subscr_id=$subscr_id where team_id = $team_id";
+            mysqli_query($conection, $query);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+
+}
+
+function cancelPlan($team_id){
+ try {
+            $conection = Database::connect();
+            if (!$conection) {
+                die('Error: in connection Team');
+            }
+            $query = "update teams set subscribtions_subscr_id=null where team_id = $team_id";
+            mysqli_query($conection, $query);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+
+}
+
+
+function getPlan($team_id)
+{
+
+try {
+            $conection = Database::connect();
+            if (!$conection) {
+                die('Error: in connection Team');
+            }
+        $query = "select s.name from teams t , subscribtions s where s.subscr_id=t.subscribtions_subscr_id and t.team_id= $team_id";
+        $result=mysqli_query($conection, $query);
+        $row = mysqli_fetch_assoc($result);
+            if ($row) {
+                return $row['name'];
+            }
+            else
+            {
+                return -1;
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+
+}
 }

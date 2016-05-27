@@ -7,7 +7,7 @@ class MySqlDatabase implements DataBaseStrategy
     private $_host = "localhost";
     private $_username = "iti";
     private $_password = "iti";
-    private $_database = "saasBase";
+    private $_database = "sassBase";
 	
 	private function __construct() {
             $this->_connection =

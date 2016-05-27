@@ -1,12 +1,7 @@
 <?php
 
-<<<<<<< HEAD:membermodule/controller/accept_invitation.php
 include_once './models/User.php';
 include_once './models/User_Team.php';
-=======
-include_once './model/User.php';
-include_once './model/User_Team.php';
->>>>>>> f9b1e76639cc9a2810612db3b4b4b7fdfc89ab1f:controller/accept_invitation.php
 $user_email = $data['email'];
 $user_password = $data['pass'];
 $team_id = $data['team_id'];
