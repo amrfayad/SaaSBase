@@ -8,7 +8,7 @@ include_once './models/InvitedUser.php';
 
 // fetch data from Request
 $email = $data['email'];
-$pass = $data['pass'];
+$pass = sha1($data['pass']);
 $name = $data['name'];
 
 // intialize objects
@@ -17,6 +17,13 @@ $team = new Team();
 $inviite = new InvitedUSer();
 $user_in_team = new User_Team();
 
+//check mail vaildation
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo "Invaild Email Format";
+}
+
+else{
 // check if email is exist
 $mailFlag = $user->CheckMail($email);
 if ($mailFlag != 1) {
@@ -48,5 +55,6 @@ if ($mailFlag != 1) {
     $response = array();
     $response['message'] = 'This Email Is already Exist';
     echo json_encode($response);
+}
 }
 ?>
