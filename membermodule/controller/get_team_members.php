@@ -1,6 +1,7 @@
 <?php
-include_once './models/User.php';
+include_once '../models/User.php';
 $team = new Team();
+
 $user= new User();
 if(isset($data['team_id']))
 {
@@ -17,8 +18,6 @@ else if (isset($data['email']))
 	$team_id=$team->getTeams($admin_id);
 	$team_member=$team->getTeamMember($team_id);
 	echo json_encode($team_member);
-
-
 
 }
 
