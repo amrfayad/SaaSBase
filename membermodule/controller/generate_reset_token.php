@@ -6,7 +6,8 @@ $user = new User();
 $error_massage="Email Does't Exist!";
 $is_email_exists=$user->check_mail($email);
 if($is_email_exists){
-    $length =24; #Length of generated token
+    $length =16; #Length of generated token
+
     $token = bin2hex(openssl_random_pseudo_bytes($length)); #Generate token randomly
     $date =  date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s'))+(24*60*60));
     #Increase date by one day and format it to Y-m-d H:i:s format
