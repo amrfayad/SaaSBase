@@ -23,7 +23,7 @@ $connection = Database::connect();
 if (!$connection) {
 die('Error:' . mysqli_connect_error());
 }
-$query = "select * from users where user_email='$email' and teams_team_id = '$team_id'";
+$query = "select * from  invitedUsers where user_email='$email' and teams_team_id = '$team_id'";
 $result = mysqli_fetch_assoc(mysqli_query($connection, $query));
 if ($result) {
 return 1;
@@ -36,5 +36,18 @@ catch (Exception $e)
 }
 
 
+function removeInvation($team_id,$email)
+{
+	try {
+$connection = Database::connect();
+if (!$connection) {
+die('Error:' . mysqli_connect_error());
+}
+$query = "delete from invitedUsers where user_email='$email' and teams_team_id = '$team_id'";
+mysqli_query($connection, $query);
+}
+catch (Exception $e)
+{ echo $e->getMessage(); }
+}
 
 }
