@@ -12,6 +12,9 @@ $pass = sha1($data['pass']);
 $name = $data['name'];
 $userProfile = $data['profile'];
 
+//declartion
+$response = array();
+
 // intialize objects
 $user = new User();
 $team = new Team();
@@ -19,8 +22,11 @@ $inviite = new InvitedUSer();
 $user_in_team = new User_Team();
 
 //check mail vaildation
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    echo "Invaild Email Format";
+if (filter_var($data['email'], FILTER_VALIDATE_EMAIL) === false) {
+    $response['message'] = 'Invalid Mail Format';
+    $response['status'] = 400;
+    echo json_encode($response);
+
 } else {
 // check if email is exist
     $mailFlag = $user->CheckMail($email);
@@ -38,12 +44,13 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 }
                 $user_id = $user->getUserId($email, $pass);
                 $user_in_team->addUser($user_id, $data['team_id']);
-                $response = array();
+                $inviite->removeInvation($data['team_id'], $email);
                 $response['message'] = 'You Have Register Succesfully and Added TO Team';
+                $response['status'] = 200;
                 echo json_encode($response);
             } else {
-                $response = array();
                 $response['message'] = 'Error in assigning to Team';
+                $response['status'] = 400;
                 echo json_encode($response);
             }
         }
@@ -57,14 +64,13 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             }
             $user_id = $user->getUserId($email, $pass);
             $team->createTeam($user_id);
-            $response = array();
             $response['message'] = 'You Have Register Successfully';
+            $response['status'] = 200;
             echo json_encode($response);
         }
     } else {
-        header('Mail already exist', true, 403);
-        $response = array();
         $response['message'] = 'This Email Is already Exist';
+        $response['status'] = 400;
         echo json_encode($response);
     }
 }
