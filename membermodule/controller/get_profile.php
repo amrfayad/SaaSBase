@@ -6,7 +6,7 @@ $userid=$data['user_id'];
 //declartion
 $response = array();
 if(isset($data['user_id']) && $data['user_id'] != null && 
-	(filter_var($data['user_id'], FILTER_VALIDATE_INT) === true))
+	( !filter_var($data['user_id'], FILTER_VALIDATE_INT) === false))
 {
 $userProfile=$user->getUserProfile($userid);
 $response['message'] = 'success';
