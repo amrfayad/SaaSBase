@@ -17,15 +17,16 @@
 include_once 'Database.php';
 include_once 'Team.php';
 class User {
-    function login($email, $passwd) {
+    function login($email) {
         try {
             $conection = Database::connect();
             if (!$conection) {
                 die('Error: ' . mysqli_connect_error());
             }
-            $query = "select * from users where user_email = '$email' and password = '$passwd'";
+            $query = "select * from users where user_email = '$email'";
             $result = mysqli_query($conection, $query);
-            while ($row = mysqli_fetch_assoc($result)) {
+            while ($row = mysqli_fetch_assoc($result))
+            {
                 return $row;
             }
             return -1;
@@ -35,8 +36,7 @@ class User {
         }
 	return -1;
     }
-    function check_mail($email)
-    {
+    function check_mail($email) {
         try {
             $connection = Database::connect();
             if (!$connection) {
@@ -123,7 +123,7 @@ class User {
         }
  }
     #AyaEMahmoud
-	function getUserId($email, $password) {
+    function getUserId($email, $password) {
         try {
             $connection = Database::connect();
             if (!$connection) {
@@ -157,8 +157,7 @@ class User {
             echo $ex->getMessage();
         }
     }
-    function getUserProfile($user_id)
-    {
+    function getUserProfile($user_id){
         try {
             $conection = Database::connect();
             if (!$conection) {
@@ -236,7 +235,6 @@ class User {
             echo $ex->getMessage();
         }
     }#AyaEMahmoud
-
     function check_admin($admin_email,$admin_password){
         try {
             $connection = Database::connect();
