@@ -1,5 +1,4 @@
 <?php
-
 /*
   desc users;
   +-----------------------+--------------+------+-----+---------+----------------+
@@ -17,7 +16,6 @@
  */
 include_once 'Database.php';
 include_once 'Team.php';
-
 class User {
     function login($email) {
         try {
@@ -54,9 +52,7 @@ class User {
             
         }
     }
-
 #AyaEMahmoud
-
     function signUp() {
 
         try {
@@ -76,7 +72,6 @@ class User {
             echo $e->getMessage();
         }
     }
-
     function admin_id($admin_email) {
         try {
             $connection = Database::connect();
@@ -95,16 +90,13 @@ class User {
             echo $e->getMessage();
         }
     }
-
 #AyaEMahmoud
-
     function team_id($admin_id) {
         try {
             $connection = Database::connect();
             if (!connection) {
                 die('Error:' . mysqli_connect_error());
             }
-
             $query = "select team_id from teams where users_user_id='$admin_id'";
             $team_id = mysqli_fetch_assoc(mysqli_query($connection, $query));
             if ($team_id) {
@@ -116,9 +108,7 @@ class User {
             echo $e->getMessage();
         }
     }
-
 #AyaEMahmoud
-
     function invite($email) {
         try {
             $connection = Database::connect();
@@ -135,7 +125,6 @@ class User {
             echo $e->getMessage();
         }
     }
-
     #AyaEMahmoud
     function getUserId($email, $password) {
         try {
@@ -153,7 +142,6 @@ class User {
             echo $ex->getMessage();
         }
     }
-
     function CheckMail($email) {
         try {
             $conection = Database::connect();
@@ -187,7 +175,6 @@ class User {
             echo $ex->getMessage();
         }
     }
-
     function checkTeamAdminPassword($admin_id, $admin_password) {
         try {
             $conection = Database::connect();
@@ -205,7 +192,6 @@ class User {
             return $e->getMessage();
         }
     }
-
     function set_token($email, $date, $token) {
         try {
             $connection = Database::connect();
@@ -221,9 +207,7 @@ class User {
             echo $ex->getMessage();
         }
     }
-
 #AyaEMahmoud
-
     function check_token($token) {
         try {
             $connection = Database::connect();
@@ -237,9 +221,7 @@ class User {
             echo $ex->getMessage();
         }
     }
-
 #AyaEMahmoud
-
     function get_token($email) {
         try {
             $connection = Database::connect();
@@ -267,9 +249,7 @@ class User {
             echo $ex->getMessage();
         }
     }
-
 #AyaEMahmoud
-
     function check_password($email) {
         try {
             $connection = Database::connect();
@@ -301,6 +281,42 @@ class User {
             return $result;
         } catch (Exception $ex) {
             echo $ex->getMessage();
+        }
+    }
+#AyaEMahmoud
+
+    
+    function get_token_expiration_date($email) {
+        
+        try {
+            $connection = Database::connect();
+            if (!$connection) {
+                die('Error in connection  return user id');
+            }
+            $query = "select token_expiration_date from users WHERE user_email = '$email'";
+            $return_expiration_date = mysqli_fetch_assoc(mysqli_query($connection, $query));
+            return $return_expiration_date['token_expiration_date'];
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }
+
+    function store_invited_users($email,$team_id) {
+        try {
+            $connection = Database::connect();
+            if (!$connection) {
+                die('Error:' . mysqli_connect_error());
+            }
+
+            $query = "INSERT INTO `invitedUsers` (`user_email`,`teams_team_id`) VALUES ('$email','$team_id')";
+            $admin_id = mysqli_fetch_assoc(mysqli_query($connection, $query));
+            if ($admin_id) {
+                return $admin_id['user_id'];
+            } else {
+                return 0;
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
     }
 
