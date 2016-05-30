@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `saasBase`.`users` (
   `user_email` VARCHAR(45) NULL,
   `password` VARCHAR(100) NULL,
   `reset_password_token` VARCHAR(100) NULL DEFAULT NULL,
-  `token_expiration_date` TIME NULL,
+  `token_expiration_date` DATETIME NULL,
   `user_profile_info` LONGTEXT NULL,
   PRIMARY KEY (`user_id`))
 ENGINE = InnoDB;
