@@ -93,6 +93,7 @@ class Team {
 
  
 
+    //get team Payment Status 
   function getPaymentStatus($team_id){
      try {
             $conection = Database::connect();
@@ -115,6 +116,7 @@ class Team {
 
   }
 
+  //Record Payment 
 
 function asignPlan($team_id,$subscr_id)
 {
@@ -131,6 +133,7 @@ function asignPlan($team_id,$subscr_id)
 
 }
 
+//cancel plan
 function cancelPlan($team_id){
  try {
             $conection = Database::connect();
@@ -145,7 +148,7 @@ function cancelPlan($team_id){
 
 }
 
-
+//get Plans Of Team
 function getPlan($team_id)
 {
 
