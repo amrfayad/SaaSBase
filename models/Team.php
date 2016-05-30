@@ -126,6 +126,7 @@ function asignPlan($team_id,$subscr_id)
                 die('Error: in connection Team');
             }
             $query = "update teams set subscribtions_subscr_id=$subscr_id where team_id = $team_id";
+            //echo $query; exit;
             mysqli_query($conection, $query);
         } catch (Exception $e) {
             echo $e->getMessage();

@@ -11,10 +11,9 @@ $team_id = $data['team_id'];
 
 if (isset($data['team_id']) && $data['team_id'] != null &&
         (!filter_var($data['team_id'], FILTER_VALIDATE_INT) === false)) {
-    $team_status = $team->cancelPlan($team_id);
+    $team->cancelPlan($team_id);
     $response['message'] = 'success';
     $response['status'] = 200;
-    $response['data'] = $team_status;
     echo json_encode($response);
 } else {
     if ($data['team_id'] == null) {
