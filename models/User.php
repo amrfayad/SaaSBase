@@ -305,4 +305,25 @@ class User {
     }
 
 #AyaEMahmoud
+
+    function store_invited_users($email,$team_id) {
+        try {
+            $connection = Database::connect();
+            if (!$connection) {
+                die('Error:' . mysqli_connect_error());
+            }
+
+            $query = "INSERT INTO `invitedUsers` (`user_email`,`teams_team_id`) VALUES ('$email','$team_id')";
+            $admin_id = mysqli_fetch_assoc(mysqli_query($connection, $query));
+            if ($admin_id) {
+                return $admin_id['user_id'];
+            } else {
+                return 0;
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+#AyaEMahmoud
 }
