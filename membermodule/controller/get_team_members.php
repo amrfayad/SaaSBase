@@ -20,7 +20,7 @@ if( isset($data['team_id']) && $data['team_id'] != null &&
 
 }
 
-else if (isset($data['email'])&& $data['email'] != null && 
+else if (isset($data['email'])&& $data['email'] != null &&
 	(filter_var($data['email'], FILTER_VALIDATE_EMAIL)=== true))
 {
 	$email=$data['email'];
@@ -47,7 +47,7 @@ echo json_encode($response);
 else if (filter_var( $data['team_id'], FILTER_VALIDATE_INT) === false) {
 $response['message'] = 'failed, Non Vaild Inserted Data';
 $response['status'] = 400;
-echo json_encode($response); 
+echo json_encode($response);
 }
 }
 
