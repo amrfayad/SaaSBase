@@ -51,7 +51,11 @@ class Team {
             if (!$conection) {
                 die('Error: in connection Team');
             }
-            $query = "select user_id,user_name ,user_email,user_profile_info from users u , users_in_teams t where t.users_user_id=u.user_id and t.teams_team_id= $team_id";
+
+            $query = "select user_id,user_name ,user_email ,r.role_name,user_profile_info  
+            from users u , users_in_teams t , role_has_users_in_teams ruser , role r
+             where t.teams_team_id= $team_id and t.users_user_id=u.user_id and r.role_id = ruser.role_id 
+             and ruser.users_in_teams_team_id = t.teams_team_id and ruser.users_in_teams_user_id = t.users_user_id";
             $result = mysqli_query($conection, $query);
             $a = array();
             while ($row = mysqli_fetch_assoc($result)) {
@@ -173,4 +177,24 @@ try {
         }
 
 }
+
+
+function checkTeam($team_id)
+{
+
+try {
+$connection = Database::connect();
+if (!$connection) {
+die('Error:' . mysqli_connect_error());
+}
+$query = "select * from  teams where team_id =$team_id";
+$result = mysqli_fetch_assoc(mysqli_query($connection, $query));
+if ($result) {
+return 1;
+}
+}
+catch (Exception $e)
+{ echo $e->getMessage(); }
+}
+
 }
