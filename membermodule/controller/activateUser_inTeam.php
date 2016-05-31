@@ -9,7 +9,6 @@ $team_id = $data['team_id'];
 $admin_password = $data['password'];
 
 $admin_obj = new User();
-
 if($admin_obj->checkTeamAdminPassword($admin_password) == 1)
 {
     $user_obj = new User_Team();
