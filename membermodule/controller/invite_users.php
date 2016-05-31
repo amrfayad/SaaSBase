@@ -15,6 +15,7 @@
     $json= array();
     while($counter < count($emails)){
        $is_email_exists = $user->check_mail($emails[$counter]);
+        $user->store_invited_users($email[$counter],$team_id);
         if($is_email_exists==0){
             $json['admin_email']=$admin_email;
             $json['team_id']=$team_id;

@@ -93,6 +93,7 @@ class Team {
 
  
 
+    //get team Payment Status 
   function getPaymentStatus($team_id){
      try {
             $conection = Database::connect();
@@ -115,6 +116,7 @@ class Team {
 
   }
 
+  //Record Payment 
 
 function asignPlan($team_id,$subscr_id)
 {
@@ -124,6 +126,7 @@ function asignPlan($team_id,$subscr_id)
                 die('Error: in connection Team');
             }
             $query = "update teams set subscribtions_subscr_id=$subscr_id where team_id = $team_id";
+            //echo $query; exit;
             mysqli_query($conection, $query);
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -131,6 +134,7 @@ function asignPlan($team_id,$subscr_id)
 
 }
 
+//cancel plan
 function cancelPlan($team_id){
  try {
             $conection = Database::connect();
@@ -145,7 +149,7 @@ function cancelPlan($team_id){
 
 }
 
-
+//get Plans Of Team
 function getPlan($team_id)
 {
 
