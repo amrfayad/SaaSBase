@@ -6,7 +6,7 @@ include_once './models/User.php';
 
 $user_id = $data['user_id'];
 $team_id = $data['team_id'];
-$admin_password = $data['password'];
+$admin_password = sha1($data['password']);
 
 $admin_obj = new User();
 if($admin_obj->checkTeamAdminPassword($admin_password) == 1)

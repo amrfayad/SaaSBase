@@ -183,11 +183,12 @@ class User {
             }
             $query = "select * from users where password = '$admin_password'";
             $result = mysqli_query($conection, $query);
-            $row = mysqli_fetch_assoc($result);
-            if ($row) {
+            if ($result) {
                 return 1;
             }
-            return -1;
+            else {
+                return -1;
+            }
         } catch (Exception $e) {
             return $e->getMessage();
         }
