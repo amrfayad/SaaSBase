@@ -94,7 +94,7 @@ class User {
     function team_id($admin_id) {
         try {
             $connection = Database::connect();
-            if (!connection) {
+            if (!$connection) {
                 die('Error:' . mysqli_connect_error());
             }
             $query = "select team_id from teams where users_user_id='$admin_id'";
@@ -244,8 +244,13 @@ class User {
                 die('Error in connection  return user id');
             }
             $query = "select user_name from users WHERE user_email= '$admin_email' And password='$admin_password'";
-            $return = mysqli_query($connection, $query);
-            return $return;
+            $return = mysqli_fetch_assoc(mysqli_query($connection, $query));
+            if($return)
+            {
+                return 1;
+            }
+                
+            return -1 ;
         } catch (Exception $ex) {
             echo $ex->getMessage();
         }
@@ -310,12 +315,8 @@ class User {
             }
 
             $query = "INSERT INTO `invitedUsers` (`user_email`,`teams_team_id`) VALUES ('$email','$team_id')";
-            $admin_id = mysqli_fetch_assoc(mysqli_query($connection, $query));
-            if ($admin_id) {
-                return $admin_id['user_id'];
-            } else {
-                return 0;
-            }
+            $result =  mysqli_query($connection, $query);
+           return $result;
         } catch (Exception $e) {
             echo $e->getMessage();
         }
