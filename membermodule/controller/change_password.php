@@ -5,7 +5,7 @@ $user = new User();
 if(isset($data['token'])) {
     $token=$data['token'];
     $email = $data['email'];
-    $password = $data['password'];
+    $password =sha1($data['password']);
     $date = strtotime($user->check_token($token));
     $date_now = strtotime(date('Y-m-d H:i:s'));
     $validate_date = $date_now - $date;
@@ -26,8 +26,8 @@ if(isset($data['token'])) {
 }
 else {
     $email = $data['email'];
-    $old_password = $data['old_password'];
-    $password = $data['password'];
+    $old_password = sha1($data['old_password']);
+    $password = sha1($data['password']);
     $old_saved_password = $user->check_password($email);
     if($old_password==$old_saved_password)
         {
