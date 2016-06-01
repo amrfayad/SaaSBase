@@ -63,6 +63,7 @@ class Team {
                   
             }
             return $a;
+
              
         } catch (Exception $e) {
             echo $e->getMessage();
