@@ -1,5 +1,4 @@
 <?php
-
 include_once './models/User.php';
 #AyaEMahmoud
 $email = $data['email'];
