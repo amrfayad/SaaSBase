@@ -56,13 +56,14 @@ class Team {
             from users u , users_in_teams t , role_has_users_in_teams ruser , role r
              where t.teams_team_id= $team_id and t.users_user_id=u.user_id and r.role_id = ruser.role_id 
              and ruser.users_in_teams_team_id = t.teams_team_id and ruser.users_in_teams_user_id = t.users_user_id";
+             //echo $query; exit;
             $result = mysqli_query($conection, $query);
             $a = array();
+            $count=0;
             while ($row = mysqli_fetch_assoc($result)) {
-                  $a[] = $row;
-                  
+                        $a[] = $row;
             }
-            return $a;
+                      return $a;
 
              
         } catch (Exception $e) {
@@ -197,5 +198,22 @@ return 1;
 catch (Exception $e)
 { echo $e->getMessage(); }
 }
+
+    function record_failed_payment($team_id)
+    {
+
+        try {
+            $connection = Database::connect();
+            if (!$connection) {
+                die('Error: in connection Team');
+            }
+            $query = "INSERT INTO `teams` (`payment_status`) VALUES ('0') ";
+            $result=mysqli_query($connection, $query);
+            return $result;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+
+    }
 
 }

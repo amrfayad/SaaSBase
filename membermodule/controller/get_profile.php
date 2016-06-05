@@ -3,6 +3,7 @@ include_once './models/User.php';
 $user = new User();
 
 $userid=$data['user_id'];
+
 //declartion
 $response = array();
 if(isset($data['user_id']) && $data['user_id'] != null && 
@@ -28,6 +29,13 @@ else if (filter_var($data['user_id'], FILTER_VALIDATE_INT) === false) {
 $response['message'] = 'failed, Non Vaild Inserted Data';
 $response['status'] = 400;
 echo json_encode($response); 
+}
+
+else
+{
+$response['message'] = 'failed, UnExcepted Error Ocuur';
+$response['status'] = 400;
+echo json_encode($response);
 }
 
 }

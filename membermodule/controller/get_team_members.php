@@ -1,5 +1,6 @@
 <?php
-include_once '/var/www/html/SaaSBase/models/User.php';
+include_once './models/User.php';
+include_once './models/Team.php';
 
 //initalize object 
 $team = new Team();
@@ -10,7 +11,8 @@ $response = array();
 
 if( isset($data['team_id']))
 {
-	if($data['team_id'] != null){
+	if($data['team_id'] != null)
+	{
 		if((!filter_var($data['team_id'], FILTER_VALIDATE_INT) === false))
 		{
 	$team_id=$data['team_id'];
