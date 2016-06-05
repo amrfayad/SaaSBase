@@ -62,9 +62,9 @@ class Team {
             $count=0;
             while ($row = mysqli_fetch_assoc($result)) {
                         $a[] = $row;
-
-                  }
+            }
                       return $a;
+
              
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -198,5 +198,22 @@ return 1;
 catch (Exception $e)
 { echo $e->getMessage(); }
 }
+
+    function record_failed_payment($team_id)
+    {
+
+        try {
+            $connection = Database::connect();
+            if (!$connection) {
+                die('Error: in connection Team');
+            }
+            $query = "INSERT INTO `teams` (`payment_status`) VALUES ('0') ";
+            $result=mysqli_query($connection, $query);
+            return $result;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+
+    }
 
 }
