@@ -82,6 +82,7 @@ class User {
             $query = "select user_id from users where user_email='$admin_email'";
             $admin_id = mysqli_fetch_assoc(mysqli_query($connection, $query));
             if ($admin_id) {
+
                 return $admin_id['user_id'];
             } else {
                 return 0;
