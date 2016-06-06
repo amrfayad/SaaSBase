@@ -1,6 +1,6 @@
 <?php
 
-include_once '/var/www/html/SaaSBase/models/User.php';
+include_once './models/User.php';
 
 //initalize object 
 $team = new Team();

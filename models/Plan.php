@@ -14,7 +14,7 @@ include_once 'Database.php';
 */
 class Plan{
 
-function checkPlan($plan_id)
+function getPlanId($plan_name)
 {
 
 try {
@@ -22,10 +22,10 @@ $connection = Database::connect();
 if (!$connection) {
 die('Error:' . mysqli_connect_error());
 }
-$query = "select * from  subscribtions where subscr_id =$plan_id";
+$query = "select subscr_id  from  subscribtions where name =$plan_name";
 $result = mysqli_fetch_assoc(mysqli_query($connection, $query));
 if ($result) {
-return 1;
+return $result['subscr_id'];
 } 
 }
 catch (Exception $e)

@@ -63,7 +63,8 @@ class User {
             }
                 $args = func_get_args();
             if (func_num_args() == 4) {
-                $query = "insert into users(user_name,user_email,password,user_profile_info) values ('" . $args[0] . "','" . $args[1] . "','" . $args[2] . "','" . $args[3] . "')";
+                $query = "insert into users(user_name,user_email,password,user_profile_info)
+                 values ('" . $args[0] . "','" . $args[1] . "','" . $args[2] . "','" . $args[3] . "')";
             } else
                 $query = "insert into users(user_name,user_email,password) values ('" . $args[0] . "','" . $args[1] . "','" . $args[2] . "')";
             mysqli_query($conection, $query);
@@ -322,4 +323,25 @@ class User {
     }
 
 #AyaEMahmoud
+
+
+
+function assignDefaultRole($user_id,$team_id)
+{
+ try {
+            $connection = Database::connect();
+            if (!$connection) {
+                die('Error:' . mysqli_connect_error());
+            }
+            $defaultRoleId=1;
+            $query = "INSERT INTO role_has_users_in_teams (role_id,users_in_teams_user_id,users_in_teams_team_id)
+              VALUES ( $defaultRoleId,$user_id,$team_id)";
+            $result =  mysqli_query($connection, $query);
+           return $result;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+
+}
+
 }
