@@ -10,7 +10,6 @@ include_once './models/InvitedUser.php';
 $email = $data['email'];
 $pass = sha1($data['pass']);
 $name = $data['name'];
-$userProfile = $data['profile'];
 
 //declartion
 $response = array();
@@ -47,6 +46,8 @@ if (filter_var($data['email'], FILTER_VALIDATE_EMAIL) === false) {
                 $inviite->removeInvation($data['team_id'], $email);
                 $response['message'] = 'You Have Register Succesfully and Added TO Team';
                 $response['status'] = 200;
+                $response['user_id'] = $user_id  ;
+                
                 echo json_encode($response);
             } else {
                 $response['message'] = 'Error in assigning to Team';
@@ -66,6 +67,7 @@ if (filter_var($data['email'], FILTER_VALIDATE_EMAIL) === false) {
             $team->createTeam($user_id);
             $response['message'] = 'You Have Register Successfully';
             $response['status'] = 200;
+            $response['user_id'] = $user_id  ;
             echo json_encode($response);
         }
     } else {
