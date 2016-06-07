@@ -103,7 +103,7 @@ class User_Team
         }
     }
 
-    function activateUser_inTeam($team_id,$user_id)
+    function activateUser_inTeam($user_id,$team_id)
     {
         try
         {
@@ -114,6 +114,7 @@ class User_Team
             }
 
             $query = "UPDATE `users_in_teams` SET `Is_active`= 1 WHERE `users_user_id`= $user_id AND `teams_team_id`= $team_id";
+            //echo $query; exit;
             $result = mysqli_query($connection, $query);
             if($result != NULL)
             {
@@ -138,7 +139,8 @@ class User_Team
                 die('Error: ' . mysqli_connect_error());
             }
 
-            $query = "UPDATE `users_in_teams` SET `Is_active`= 0 WHERE `users_user_id`= $user_id AND `teams_team_id`= $team_id";
+            $query = "UPDATE `users_in_teams` SET `Is_active`= 0 WHERE `users_user_id`= $user_id
+             AND `teams_team_id`= $team_id";
             $result = mysqli_query($connection, $query);
             if($result != NULL)
             {
@@ -152,5 +154,35 @@ class User_Team
             echo $ex->getMessage();
         }
     } #Yasmine
+
+
+    function getUserStatus($user_id,$team_id)
+    {
+
+       try
+        {
+            $connection = Database::connect();
+            if(!$connection)
+            {
+                die('Error: ' . mysqli_connect_error());
+            }
+
+            $query = "select Is_active from  users_in_teams WHERE users_user_id= $user_id
+             AND teams_team_id = $team_id";
+            $result = mysqli_query($connection, $query);
+             $row = mysqli_fetch_assoc($result);
+             if($row)
+             {
+                return $row['Is_active'];
+            }
+            else
+             {   return -1;}
+        }
+        catch(Exception $ex)
+        {
+            echo $ex->getMessage();
+        }
+
+    }
 
 }

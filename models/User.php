@@ -176,19 +176,23 @@ class User {
             echo $ex->getMessage();
         }
     }
-    function checkTeamAdminPassword($admin_password) {
+    function checkTeamAdminPassword($admin_password,$admin_id) {
         try {
             $conection = Database::connect();
             if (!$conection) {
                 die('Error: ' . mysqli_connect_error());
             }
-            $query = "select * from users where password = '$admin_password'";
+            $query = "select password  from users where password = '$admin_password' and
+             user_id = $admin_id ";
             $result = mysqli_query($conection, $query);
             $row = mysqli_fetch_assoc($result);
-            if ($row) {
+            if ($row['password']) {
                 return 1;
             }
+            else 
+            {
             return -1;
+        }
         } catch (Exception $e) {
             return $e->getMessage();
         }
