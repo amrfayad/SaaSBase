@@ -127,7 +127,7 @@ class User_Team
         }
     } #Yasmine
 
-    function deactivateUser_inTeam($team_id,$user_id)
+    function deactivateUser_inTeam($user_id,$team_id)
     {
         try
         {
