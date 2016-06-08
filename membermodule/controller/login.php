@@ -1,6 +1,6 @@
 <?php
 include_once './models/User.php';
-if(isset($data['email']))
+if(isset($data['email']) && $data['email'] != null)
 {
     $email = $data['email'];
     $response = array();
@@ -29,7 +29,7 @@ if(isset($data['email']))
     }
 }
 else {
-        $response['message'] = 'You must send data[email] ?';
+        $response['message'] = 'empty Mail not applicable ?';
         $response['status'] = 400;
             
 }

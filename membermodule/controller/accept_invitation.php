@@ -11,7 +11,6 @@ $user = new User();
 $user_id = $user->getUserId($user_email,$user_password);
 
 //check on email and password if not valid
-
 if($user_id == -1)
 {
     echo "Invalid Email or Password";

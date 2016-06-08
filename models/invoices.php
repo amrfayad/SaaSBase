@@ -42,15 +42,19 @@ class Invoices{
     {
         
         
-        
-        try {
+     try {
 
             $conection = Database::connect();
             if (!$conection) {
                 die('Error in connection  userCreate');
             }
-
-            $query = "insert into invoices (subscr_name,teams_team_id,other_information) values ('" . $subscrName . "','" . $team_id . "','" . $others . "')";
+                $args = func_get_args();
+            if (func_num_args() == 3) {
+                $query = "insert into invoices (subscr_name ,teams_team_id,other_information)
+                 values ('" . $args[0] . "'," . $args[1] . ",'" . $args[2] . "')";
+            } else
+            $query = "insert into invoices (subscr_name ,teams_team_id)
+                 values ('" . $args[0] . "'," . $args[1] . ")";
             mysqli_query($conection, $query);
         } catch (Exception $e) {
 

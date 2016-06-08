@@ -131,7 +131,7 @@ function asignPlan($team_id,$subscr_id)
             if (!$conection) {
                 die('Error: in connection Team');
             }
-            $query = "update teams set subscribtions_subscr_id=$subscr_id where team_id = $team_id";
+            $query = "update teams set subscribtions_subscr_id=$subscr_id , payment_status =1 where team_id = $team_id";
             //echo $query; exit;
             mysqli_query($conection, $query);
         } catch (Exception $e) {
@@ -147,7 +147,7 @@ function cancelPlan($team_id){
             if (!$conection) {
                 die('Error: in connection Team');
             }
-            $query = "update teams set subscribtions_subscr_id=null where team_id = $team_id";
+            $query = "update teams set subscribtions_subscr_id=null , payment_status =0 where team_id = $team_id";
             mysqli_query($conection, $query);
         } catch (Exception $e) {
             echo $e->getMessage();

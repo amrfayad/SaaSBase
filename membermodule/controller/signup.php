@@ -27,6 +27,9 @@ if (filter_var($data['email'], FILTER_VALIDATE_EMAIL) === false) {
     echo json_encode($response);
 
 } else {
+
+    if( $pass != null && $name !=null)
+    {
 // check if email is exist
     $mailFlag = $user->CheckMail($email);
     if ($mailFlag != 1) {
@@ -44,12 +47,15 @@ if (filter_var($data['email'], FILTER_VALIDATE_EMAIL) === false) {
                 }
                 $user_id = $user->getUserId($email, $pass);
                 $user_in_team->addUser($user_id, $data['team_id']);
+                $user->assignDefaultRole($user_id,$data['team_id']);
                 $inviite->removeInvation($data['team_id'], $email);
                 $response['message'] = 'You Have Register Succesfully and Added TO Team';
                 $response['status'] = 200;
+                $response['user_id'] = $user_id  ;
+                
                 echo json_encode($response);
             } else {
-                $response['message'] = 'Error when assigning to Team';
+                $response['message'] = 'Error when assigning to Team,you not have inventaion ';
                 $response['status'] = 400;
                 echo json_encode($response);
             }
@@ -67,6 +73,7 @@ if (filter_var($data['email'], FILTER_VALIDATE_EMAIL) === false) {
             $team->createTeam($user_id);
             $response['message'] = 'You Have Register Successfully';
             $response['status'] = 200;
+            $response['user_id'] = $user_id  ;
             echo json_encode($response);
         }
     } else {
@@ -74,5 +81,29 @@ if (filter_var($data['email'], FILTER_VALIDATE_EMAIL) === false) {
         $response['status'] = 400;
         echo json_encode($response);
     }
+}
+else 
+{
+   if($email == null)
+   {
+     $response['message'] = 'Mail cannot be empty';
+        $response['status'] = 400;
+        echo json_encode($response);
+   }
+ else if ($pass != null)
+    {
+     $response['message'] = 'password cannot be empty';
+        $response['status'] = 400;
+        echo json_encode($response);
+   }
+
+    else if ($name != null)
+    {
+     $response['message'] = 'Name cannot be empty';
+        $response['status'] = 400;
+        echo json_encode($response);
+   }
+
+}
 }
 ?>
