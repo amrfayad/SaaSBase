@@ -9,6 +9,7 @@ $team_id = $data['team_id'];
 $admin_password = sha1($data['password']);
 $admin_id =$data['admin_id'];
 
+
 $admin_obj = new User();
 $user_obj = new User_Team();
 
@@ -21,8 +22,10 @@ if (!filter_var($user_id, FILTER_VALIDATE_INT) === false)
 {
 if($admin_obj->checkTeamAdminPassword($admin_password,$data['admin_id']) == 1)
 {
-
-    if($user_obj->getUserStatus($user_id,$team_id) == 0)
+$checkUserExist= $admin_obj->checkUserExist($user_id);
+if($checkUserExist == 1)
+{
+if($user_obj->getUserStatus($user_id,$team_id) == 0)
 {
 	$response['message'] = 'User is already deactivated';
     $response['status'] = 200;
@@ -30,19 +33,21 @@ if($admin_obj->checkTeamAdminPassword($admin_password,$data['admin_id']) == 1)
 }
 else
 {
-    $inactive_user = $user_obj->deactivateUser_inTeam($user_id,$team_id);
-
-    if($inactive_user == 1)
-    {
+    $user_obj->deactivateUser_inTeam($user_id,$team_id);
     $response['message'] = 'User is deactivated succesfully';
     $response['status'] = 200;
     echo json_encode($response);
-    }else{
-    $response['message'] = 'Error when deactivate user';
-    $response['status'] = 400;
-    echo json_encode($response);
     }
 }
+
+else
+{
+
+  $response['message'] = 'User is Not Exist';
+  $response['status'] = 400;
+  echo json_encode($response);   
+}
+
 }
 else{
 	$response['message'] = 'Invaild Password';
@@ -52,7 +57,7 @@ else{
 }
 
 }
-   else
+   else 
    {
    	$response['message'] = 'user id only be integer value';
     $response['status'] = 400;
@@ -60,13 +65,13 @@ else{
    }
 }
 
-else
+else 
 {
 	if($user_id == null)
 	{
 	$response['message'] = 'user id cannot be empty';
     $response['status'] = 400;
-    echo json_encode($response);
+    echo json_encode($response);	
 	}
 
 	else if($team_id == null)

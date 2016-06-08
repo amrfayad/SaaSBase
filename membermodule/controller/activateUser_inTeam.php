@@ -22,28 +22,30 @@ if($user_id != null && $team_id !=null && $admin_password != null && $admin_id !
         {
             if($admin_obj->checkTeamAdminPassword($admin_password,$admin_id) == 1)
             {
-
-                if($user_obj->getUserStatus($user_id,$team_id) == 1)
-                {
-                    $response['message'] = 'User is already activated';
-                    $response['status'] = 200;
-                    echo json_encode($response);
-                }
-                else{
-                    $active_user = $user_obj->activateUser_inTeam($user_id,$team_id);
-
-                    if($active_user == 1)
+                   
+                $checkUserExist= $admin_obj->checkUserExist($user_id);
+                 if($checkUserExist == 1)
                     {
-                        $response['message'] = 'User is activated succesfully';
-                        $response['status'] = 200;
-                        echo json_encode($response);
-                    }else{
-                        $response['message'] = 'Error when activate user';
-                        $response['status'] = 200;
-                        echo json_encode($response);
-
+                        if($user_obj->getUserStatus($user_id,$team_id) == 1)
+                            {
+                                $response['message'] = 'User is already activated';
+                                $response['status'] = 200;
+                                echo json_encode($response);
+                            }
+                        else{
+                                $active_user = $user_obj->activateUser_inTeam($user_id,$team_id);
+                                $response['message'] = 'User is activated succesfully';
+                                $response['status'] = 200;
+                                echo json_encode($response);
+                            }
                     }
-                }
+                    else
+                    {
+
+                      $response['message'] = 'User is Not Exist';
+                      $response['status'] = 400;
+                      echo json_encode($response);
+                    }
             }
             else{
                 $response['message'] = 'Invaild Password';
@@ -74,36 +76,6 @@ if($user_id != null && $team_id !=null && $admin_password != null && $admin_id !
         }
     }
 
-    if (!filter_var($user_id, FILTER_VALIDATE_INT) === false)
-    {
-        if($admin_obj->checkTeamAdminPassword($admin_password,$admin_id) == 1)
-            {
-
-                 $checkUserExist= $admin_obj->checkUserExist($user_id);
-                 if($checkUserExist == 1)
-                    {
-                        if($user_obj->getUserStatus($user_id,$team_id) == 1)
-                            {
-                                $response['message'] = 'User is already activated';
-                                $response['status'] = 200;
-                                echo json_encode($response);
-                            }
-                        else{
-                                $active_user = $user_obj->activateUser_inTeam($user_id,$team_id);
-                                $response['message'] = 'User is activated succesfully';
-                                $response['status'] = 200;
-                                echo json_encode($response);
-                            }
-                    }
-                    else
-                    {
-
-                      $response['message'] = 'User is Not Exist';
-                      $response['status'] = 400;
-                      echo json_encode($response);
-                    }
-        }
-
-}
+ 
 
 
