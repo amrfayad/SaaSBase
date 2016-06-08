@@ -6,20 +6,25 @@ include_once './models/User.php';
 
 $user_id = $data['user_id'];
 $team_id = $data['team_id'];
-$admin_password = $data['password'];
+$admin_id = $data['admin_id'];
+$admin_password = sha1($data['password']);
 
 $admin_obj = new User();
 
-if($admin_obj->checkTeamAdminPassword($admin_password) == 1)
+$result = $admin_obj->checkTeamAdminPassword($admin_password,$admin_id);
+
+if($result == 1)
 {
     $user_obj = new User_Team();
-    $inactive_user = $user_obj->deactivateUser_inTeam($user_id,$team_id);
+    $inactive_user = $user_obj->deactivateUser_inTeam($team_id,$user_id);
 
     if($inactive_user == 1)
     {
         echo "User is Deactivated Successfully";
+        return 1 ;
     }else{
         echo "Error in Deactivate User";
+        return -1 ;
     }
 }else{
     echo "Invalid Password";

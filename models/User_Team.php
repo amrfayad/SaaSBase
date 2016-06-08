@@ -113,7 +113,6 @@ class User_Team
                 die('Error: ' . mysqli_connect_error());
             }
             $query = "UPDATE users_in_teams SET Is_active= 1 WHERE users_user_id= $user_id AND teams_team_id = $team_id";
-           // echo $query; exit;
             $result = mysqli_query($connection, $query);
             if($result != NULL)
             {
@@ -128,7 +127,7 @@ class User_Team
         }
     } #Yasmine
 
-    function deactivateUser_inTeam($user_id,$team_id)
+    function deactivateUser_inTeam($team_id,$user_id)
     {
         try
         {
