@@ -22,7 +22,6 @@ if (!filter_var($user_id, FILTER_VALIDATE_INT) === false)
 if($admin_obj->checkTeamAdminPassword($admin_password,$data['admin_id']) == 1)
 {
 
-$result = $admin_obj->checkTeamAdminPassword($admin_password,$admin_id);
     if($user_obj->getUserStatus($user_id,$team_id) == 0)
 {
 	$response['message'] = 'User is already deactivated';
@@ -53,7 +52,7 @@ else{
 }
 
 }
-   else 
+   else
    {
    	$response['message'] = 'user id only be integer value';
     $response['status'] = 400;
@@ -61,13 +60,13 @@ else{
    }
 }
 
-else 
+else
 {
 	if($user_id == null)
 	{
 	$response['message'] = 'user id cannot be empty';
     $response['status'] = 400;
-    echo json_encode($response);	
+    echo json_encode($response);
 	}
 
 	else if($team_id == null)

@@ -112,14 +112,7 @@ class User_Team
                 die('Error: ' . mysqli_connect_error());
             }
             $query = "UPDATE `users_in_teams` SET `Is_active`= 1 WHERE `users_user_id`= $user_id AND `teams_team_id`= $team_id";
-            //echo $query; exit;
-            $result = mysqli_query($connection, $query);
-            if($result != NULL)
-            {
-                return 1 ;
-            }else{
-                return 0 ;
-            }
+            mysqli_query($connection, $query);
         }
         catch(Exception $ex)
         {
@@ -137,15 +130,9 @@ class User_Team
                 die('Error: ' . mysqli_connect_error());
             }
 
-            $query = "UPDATE `users_in_teams` SET `Is_active`= 0 WHERE `users_user_id`= $user_id
+             $query = "UPDATE `users_in_teams` SET `Is_active`= 0 WHERE `users_user_id`= $user_id
              AND `teams_team_id`= $team_id";
-            $result = mysqli_query($connection, $query);
-            if($result != NULL)
-            {
-                return 1 ;
-            }else{
-                return 0 ;
-            }
+             mysqli_query($connection, $query);
         }
         catch(Exception $ex)
         {
