@@ -11,7 +11,7 @@ $response = array();
 
 $user_id= $data['user_id'];
 
-if(isset($data['user_id']) && $user_id!=null && (!filter_var($data['user_email'], FILTER_VALIDATE_INT) === false) )
+if(isset($data['user_id']) && (!filter_var($data['user_email'], FILTER_VALIDATE_INT) === false) )
 {
 	 
 

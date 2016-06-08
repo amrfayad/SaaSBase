@@ -5,7 +5,7 @@ include_once './models/Role.php';
 $role_name = $data['role_name'];
 $role_obj = new Role();
 
-if($role_name != null )
+if(isset($data['role_name']) )
 {
 if($role_obj->check_if_role_exist($role_name) == 1){
 

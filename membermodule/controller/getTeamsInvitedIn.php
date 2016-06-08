@@ -11,7 +11,7 @@ $response = array();
 
 $user_email= $data['user_email'];
 
-if(isset($data['user_email']) && $user_email !=null && (!filter_var($data['user_email'], FILTER_VALIDATE_EMAIL) === false) )
+if(isset($data['user_email']) && (!filter_var($data['user_email'], FILTER_VALIDATE_EMAIL) === false) )
 {
 	 if($user->CheckMail($user_email)==1)
 	 {
