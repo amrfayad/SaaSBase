@@ -74,7 +74,7 @@ class User_Team
             $query = "select users_user_id from users_in_teams"
                     . " where teams_team_id = $team_id and role_role_id = $billing_role_id ";
             $result = mysqli_query($conection, $query);
-            $row = $row = mysqli_fetch_assoc($result);
+            $row =  mysqli_fetch_assoc($result);
             return $row['users_user_id'] ;
         }
         catch (Exception $e)
