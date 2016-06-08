@@ -52,7 +52,7 @@ class Team {
                 die('Error: in connection Team');
             }
 
-            $query = "select user_id,user_name ,user_email ,r.role_name,user_profile_info,t.teams_team_id
+            $query = "select user_id,user_name ,user_email ,r.role_name,user_profile_info,t.teams_team_id,t.Is_active
             from users u , users_in_teams t , role_has_users_in_teams ruser , role r
              where t.teams_team_id= $team_id and t.users_user_id=u.user_id and r.role_id = ruser.role_id 
              and ruser.users_in_teams_team_id = t.teams_team_id and ruser.users_in_teams_user_id = t.users_user_id";
@@ -131,7 +131,7 @@ function asignPlan($team_id,$subscr_id)
             if (!$conection) {
                 die('Error: in connection Team');
             }
-            $query = "update teams set subscribtions_subscr_id=$subscr_id where team_id = $team_id";
+            $query = "update teams set subscribtions_subscr_id=$subscr_id , payment_status =1 where team_id = $team_id";
             //echo $query; exit;
             mysqli_query($conection, $query);
         } catch (Exception $e) {
@@ -147,7 +147,7 @@ function cancelPlan($team_id){
             if (!$conection) {
                 die('Error: in connection Team');
             }
-            $query = "update teams set subscribtions_subscr_id=null where team_id = $team_id";
+            $query = "update teams set subscribtions_subscr_id=null , payment_status =0 where team_id = $team_id";
             mysqli_query($conection, $query);
         } catch (Exception $e) {
             echo $e->getMessage();

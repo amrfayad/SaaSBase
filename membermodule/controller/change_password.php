@@ -2,6 +2,19 @@
 include_once './models/User.php';
 #AyaEMahmoud
 $user = new User();
+
+//declartion
+$response = array();
+if($data['email'] !=null && $data['password'] != null)
+{
+    //check mail vaildation
+if (filter_var($data['email'], FILTER_VALIDATE_EMAIL) === false) {
+    $response['message'] = 'Invalid Mail Format';
+    $response['status'] = 400;
+    echo json_encode($response);
+
+}
+else{
 if(isset($data['token'])) {
     $token=$data['token'];
     $email = $data['email'];
@@ -46,3 +59,22 @@ else {
     }
 }
 echo json_encode($response);
+}
+}
+
+else
+{
+    if($data['email']==null)
+    {
+       $response['message'] = 'Email cannot be empty ';
+       $response['status'] = 400; 
+       echo json_encode($response);
+    }
+
+    else if($data['password'] != null)
+    {
+     $response['message'] = 'password cannot be empty ';
+    $response['status'] = 400; 
+    echo json_encode($response);   
+    }
+}

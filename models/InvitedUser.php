@@ -14,7 +14,6 @@
 
 include_once 'Database.php';
 class InvitedUSer{
-
 function CheckInvation($team_id, $email)
 {
 
@@ -55,4 +54,26 @@ function removeInvation($team_id,$email)
             echo $e->getMessage();
            }
       }
+//return all teams that user is assign invenation to
+function getTeamsUserInvitedIn($user_email)
+{
+      try {
+                  $conection = Database::connect();
+                  if (!$conection) {
+                      die('Error: in connection Team');
+                  }
+
+                  $query = "select teams_team_id from  invitedUsers where user_email='$email'";
+            $result = mysqli_query($conection, $query);
+                  $a = array();
+                  while ($row = mysqli_fetch_assoc($result)) {
+                              $a[] = $row;
+                  }
+                            return $a;
+
+                  
+              } catch (Exception $e) {
+                  echo $e->getMessage();
+              }	
+  }
 }

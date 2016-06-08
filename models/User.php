@@ -64,7 +64,8 @@ class User {
             }
                 $args = func_get_args();
             if (func_num_args() == 4) {
-                $query = "insert into users(user_name,user_email,password,user_profile_info) values ('" . $args[0] . "','" . $args[1] . "','" . $args[2] . "','" . $args[3] . "')";
+                $query = "insert into users(user_name,user_email,password,user_profile_info)
+                 values ('" . $args[0] . "','" . $args[1] . "','" . $args[2] . "','" . $args[3] . "')";
             } else
                 $query = "insert into users(user_name,user_email,password) values ('" . $args[0] . "','" . $args[1] . "','" . $args[2] . "')";
             mysqli_query($conection, $query);
@@ -83,6 +84,7 @@ class User {
             $query = "select user_id from users where user_email='$admin_email'";
             $admin_id = mysqli_fetch_assoc(mysqli_query($connection, $query));
             if ($admin_id) {
+
                 return $admin_id['user_id'];
             } else {
                 return 0;
@@ -113,7 +115,7 @@ class User {
     function invite($email) {
         try {
             $connection = Database::connect();
-            if (!connection) {
+            if (!$connection) {
                 die('Error:' . mysqli_connect_error());
             }
             $query = "select user_name from users where user_email='$email'";
@@ -176,19 +178,23 @@ class User {
             echo $ex->getMessage();
         }
     }
-    function checkTeamAdminPassword($admin_password) {
+    function checkTeamAdminPassword($admin_password,$admin_id) {
         try {
-            $conection = Database::connect();
-            if (!$conection) {
+            $connection = Database::connect();
+            if (!$connection) {
                 die('Error: ' . mysqli_connect_error());
             }
-            $query = "select * from users where password = '$admin_password'";
-            $result = mysqli_query($conection, $query);
-            $row = mysqli_fetch_assoc($result);
-            if ($row) {
+
+            $query = "select password from users where password = '$admin_password' and user_id = '$admin_id'";
+            $result = mysqli_fetch_assoc(mysqli_query($connection, $query));
+
+            if ($result) {
                 return 1;
             }
-            return -1;
+            else {
+                return -1;
+            }
+
         } catch (Exception $e) {
             return $e->getMessage();
         }
@@ -323,4 +329,73 @@ class User {
     }
 
 #AyaEMahmoud
+
+
+
+function assignDefaultRole($user_id,$team_id)
+{
+ try {
+            $connection = Database::connect();
+            if (!$connection) {
+                die('Error:' . mysqli_connect_error());
+            }
+            $defaultRoleId=1;
+            $query = "INSERT INTO role_has_users_in_teams (role_id,users_in_teams_user_id,users_in_teams_team_id)
+              VALUES ( $defaultRoleId,$user_id,$team_id)";
+            $result =  mysqli_query($connection, $query);
+           return $result;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+
+}
+
+
+function checkUserExist($user_id)
+{
+
+try {
+            $conection = Database::connect();
+            if (!$conection) {
+                die('Error in connection return user id');
+            }
+            $query = "SELECT * FROM users where user_id= $user_id";
+            $result = mysqli_query($conection, $query);
+            $num_rows = mysqli_num_rows($result);
+            if ($num_rows == 1) {
+                return 1;
+            } else {
+                return -1;
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
+
+}
+
+function getTeamsInvitedIn($user_email)
+{
+
+     try {
+            $conection = Database::connect();
+            if (!$conection) {
+                die('Error: in connection ');
+            }
+
+            $query ="select U.user_email,U.user_name from users U , teams T , invitedUsers IU
+            where IU.user_email= '$user_email' and IU.teams_team_id = T.team_id 
+            and T.users_user_id= U.user_id" ;
+            $result = mysqli_query($conection, $query);
+            $a = array();
+            while ($row = mysqli_fetch_assoc($result)) {
+                        $a[] = $row;
+            }
+                      return $a;
+
+             
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+}
+
 }
