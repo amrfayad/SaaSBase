@@ -372,4 +372,30 @@ try {
 
 }
 
+function getTeamsInvitedIn($user_email)
+{
+
+     try {
+            $conection = Database::connect();
+            if (!$conection) {
+                die('Error: in connection Team');
+            }
+
+            $query ="select U.user_email,U.user_name from users U , teams T , invitedUsers IU
+            where IU.user_email=$user_email and IU.teams_team_id = T.team_id 
+            and T.users_user_id= U.user_id" ;
+             //echo $query; exit;
+            $result = mysqli_query($conection, $query);
+            $a = array();
+            while ($row = mysqli_fetch_assoc($result)) {
+                        $a[] = $row;
+            }
+                      return $a;
+
+             
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+}
+
 }
