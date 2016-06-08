@@ -16,7 +16,7 @@ if(isset($data['user_email']) && $user_email !=null && (!filter_var($data['user_
 	 if($user->CheckMail($user_email)==1)
 	 {
 
-    $result=$user->getTeamsInvitedIn($user_eamil);
+    $result=$user->getTeamsInvitedIn($user_email);
     $response['message'] = 'success';
     $response['status'] = 200;
     $response['data']=$result;
