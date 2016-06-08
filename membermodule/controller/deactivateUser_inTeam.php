@@ -22,7 +22,9 @@ if (!filter_var($user_id, FILTER_VALIDATE_INT) === false)
 {
 if($admin_obj->checkTeamAdminPassword($admin_password,$data['admin_id']) == 1)
 {
-
+    $checkUserExist= $admin_obj->checkUserExist($user_id);
+if($checkUserExist == 1)
+{
 if($user_obj->getUserStatus($user_id,$team_id) == 0)
 {
 	$response['message'] = 'User is already deactivated';
@@ -31,19 +33,21 @@ if($user_obj->getUserStatus($user_id,$team_id) == 0)
 }
 else
 {
-    $inactive_user = $user_obj->deactivateUser_inTeam($user_id,$team_id);
-
-    if($inactive_user == 1)
-    {
+    $user_obj->deactivateUser_inTeam($user_id,$team_id);
     $response['message'] = 'User is deactivated succesfully';
     $response['status'] = 200;
     echo json_encode($response);
-    }else{
-    $response['message'] = 'Error when deactivate user';
-    $response['status'] = 400;
-    echo json_encode($response);
     }
 }
+
+else
+{
+
+  $response['message'] = 'User is Not Exist';
+  $response['status'] = 400;
+  echo json_encode($response);   
+}
+
 }
 else{
 	$response['message'] = 'Invaild Password';

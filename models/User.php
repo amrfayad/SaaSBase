@@ -348,4 +348,27 @@ function assignDefaultRole($user_id,$team_id)
 
 }
 
+
+function checkUserExist($user_id)
+{
+
+try {
+            $conection = Database::connect();
+            if (!$conection) {
+                die('Error in connection return user id');
+            }
+            $query = "SELECT * FROM users where user_id= $user_id";
+            $result = mysqli_query($conection, $query);
+            $num_rows = mysqli_num_rows($result);
+            if ($num_rows == 1) {
+                return 1;
+            } else {
+                return -1;
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
+
+}
+
 }
