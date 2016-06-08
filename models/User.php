@@ -41,6 +41,7 @@ class User {
             if (!$connection) {
                 die('Error:' . mysqli_connect_error());
             }
+            $email = preg_replace( "/\r|\n/", "", $email );
             $query = "select user_id from users where user_email='$email'";
             $name = mysqli_fetch_assoc(mysqli_query($connection, $query));
             if ($name) {
