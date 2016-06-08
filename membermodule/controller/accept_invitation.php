@@ -43,8 +43,18 @@ if($user_id == -1)
     echo json_encode($response);
 }else{
     
+    //check invation already Exist for this user
+    if($invite_user->CheckInvation($team_id,$user_name) == 1)
+    {
     $user_team->accept_invitation($user_id,$team_id);
     $invite_user->removeInvation($team_id,$user_email);
+}
+else
+{
+   $response['message'] = 'failed, Invation not Exist';
+    $response['status'] = 400;
+    echo json_encode($response); 
+}
 
 }
 }
