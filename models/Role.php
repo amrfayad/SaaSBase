@@ -113,4 +113,26 @@ class Role
         return -1 ;
     }
 
+
+    function getRoleId($role_name)
+    {
+
+     try
+        {
+            $connection = Database::connect();
+            if(!$connection){
+                die('Error In Db Connection: ' . mysqli_connect_error());
+            }
+
+                $query = "SELECT  role_id FROM role WHERE role_name = 'billing'";
+                $result = mysqli_query($connection,$query);
+                $row=mysql_fetch_assoc($result);
+                return $row['user_id'];
+        }
+        catch(Exception $ex){
+            echo $ex->getMessage();
+        }
+
+    }
+
 }

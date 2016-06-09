@@ -66,8 +66,8 @@ class User_Team
             if (!$conection) {
                 die('Error: ' . mysqli_connect_error());
             }
-            $query = "select users_user_id from users_in_teams"
-                    . " where teams_team_id = $team_id and role_role_id = $billing_role_id ";
+            $query = "select users_in_teams_user_id from role_has_users_in_teams"
+                    . " where users_in_teams_team_id = $team_id and role_id = $billing_role_id ";
             $result = mysqli_query($conection, $query);
             $row =  mysqli_fetch_assoc($result);
             return $row['users_user_id'] ;
