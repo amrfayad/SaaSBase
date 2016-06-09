@@ -33,12 +33,7 @@ class User_Team
             }
             //insert into db
             $query = "INSERT INTO users_in_teams(users_user_id, teams_team_id, Is_active) VALUES ($user_id,$team_id,1)";
-            $result = mysqli_query($connection,$query);
-            if($result != NULL){
-                return 1;
-            }else{
-                return 0;
-            }
+            mysqli_query($connection,$query);
         }
         catch(Exception $ex){
             echo $ex->getMessage();

@@ -11,9 +11,7 @@ $response = array();
 
 if( isset($data['team_id']))
 {
-	if($data['team_id'] != null)
-	{
-		if((!filter_var($data['team_id'], FILTER_VALIDATE_INT) === false))
+	if((!filter_var($data['team_id'], FILTER_VALIDATE_INT) === false))
 		{
 	$team_id=$data['team_id'];
 	$team_member=$team->getTeamMember($team_id);
@@ -28,20 +26,12 @@ $response['status'] = 400;
 echo json_encode($response);
 }
 }
-else
-{
-$response['message'] = 'failed, empty data not applicable';
-$response['status'] = 400;
-echo json_encode($response);
-}
-}
+
 
 
 else if (isset($data['email']))
 {
-	if( $data['email'] != null )
-	{
-		if(!(filter_var($data['email'], FILTER_VALIDATE_EMAIL)=== false))
+	if(!(filter_var($data['email'], FILTER_VALIDATE_EMAIL)=== false))
 		{
 	$email=$data['email'];
 	$admin_id=$user->admin_id($email);
@@ -57,7 +47,10 @@ $response['message'] = 'failed, Non Vaild Inserted Data';
 $response['status'] = 400;
 echo json_encode($response);
 }
-	}
+	
+}
+
+
 else
 {
 $response['message'] = 'failed, empty data not applicable';
@@ -65,7 +58,6 @@ $response['status'] = 400;
 echo json_encode($response);
 }
 
-}
 
 
 

@@ -16,7 +16,7 @@ $user_obj = new User_Team();
 //intalize 
 $response = array();
 
-if($user_id != null && $team_id !=null && $admin_password != null && $admin_id != null)
+if(isset($data['user_id'])&& isset($data['team_id'])&& isset($data['password']) && isset($data['admin_id']))
 {
 if (!filter_var($user_id, FILTER_VALIDATE_INT) === false)
 {
