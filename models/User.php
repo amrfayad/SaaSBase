@@ -382,7 +382,7 @@ function getTeamsInvitedIn($user_email)
                 die('Error: in connection ');
             }
 
-            $query ="select U.user_email,U.user_name from users U , teams T , invitedUsers IU
+            $query ="select U.user_email,U.user_name,T.team_id from users U , teams T , invitedUsers IU
             where IU.user_email= '$user_email' and IU.teams_team_id = T.team_id 
             and T.users_user_id= U.user_id" ;
             $result = mysqli_query($conection, $query);
