@@ -426,4 +426,26 @@ function getTeamsMemberIn($user_id)
 
 }
 
+
+function checkUserInTeam($user_id,$team_id)
+{
+
+ $conection = Database::connect();
+       try {
+            if (!$conection) {
+                die('Error in connection return user id');
+            }
+            $query = "SELECT * FROM  role_has_users_in_teams where users_in_teams_team_id= $team_id and
+            users_in_teams_user_id= $user_id ";
+            $result = mysqli_query($conection, $query);
+            $num_rows = mysqli_num_rows($result);
+            if ($num_rows == 1) {
+                return 1;
+        }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
+
+}
+
 }
