@@ -124,10 +124,10 @@ class Role
                 die('Error In Db Connection: ' . mysqli_connect_error());
             }
 
-                $query = "SELECT  role_id FROM role WHERE role_name = 'billing'";
+                $query = "SELECT * FROM role WHERE role_name = '$role_name'";
                 $result = mysqli_query($connection,$query);
-                $row=mysql_fetch_assoc($result);
-                return $row['user_id'];
+                $role = mysqli_fetch_assoc($result);
+                return $role['role_id'];
         }
         catch(Exception $ex){
             echo $ex->getMessage();

@@ -47,8 +47,8 @@ class User_Team
             if (!$conection) {
                 die('Error: ' . mysqli_connect_error());
             }
-            $query = "update users_in_teams set role_role_id = $role_id "
-                    . "where teams_team_id = $team_id and  users_user_id = $user_id ";
+            $query = "update role_has_users_in_teams set role_id = $role_id "
+                    . "where users_in_teams_team_id = $team_id and  users_in_teams_user_id = $user_id ";
             $result = mysqli_query($conection, $query);
             
             return $result ;
@@ -70,7 +70,7 @@ class User_Team
                     . " where users_in_teams_team_id = $team_id and role_id = $billing_role_id ";
             $result = mysqli_query($conection, $query);
             $row =  mysqli_fetch_assoc($result);
-            return $row['users_user_id'] ;
+            return $row['users_in_teams_user_id'] ;
         }
         catch (Exception $e)
         {
