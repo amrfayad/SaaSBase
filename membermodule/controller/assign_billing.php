@@ -44,7 +44,7 @@ if(isset($data['team_id']) && isset($data['pass']) && isset($data['user_id']))
               $checkUSer=$user->checkUserInTeam($user_id,$team_id);
                  if($checkUSer == 1)
                  {          
-            $userInTeam->assign_role($team_id, $user_id ,$roleId);   
+            $userInTeam->assign_role($team_id, $user_id ,$roleId);
             }
             else 
             {
