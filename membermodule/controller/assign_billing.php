@@ -40,11 +40,17 @@ if(isset($data['team_id']) && isset($data['pass']) && isset($data['user_id']))
             $roleId=$role->getRoleId($role_name);
             $userInTeam->assign_role($team_id,$billing_user_id,$roleId);
           }
-              // assign billing to new user  
+              //check user already exist in This Team
               $checkUSer=$user->checkUserInTeam($user_id,$team_id);
                  if($checkUSer == 1)
-                 {          
-            $userInTeam->assign_role($team_id, $user_id ,$roleId);   
+                 { 
+                          
+                // assign billing to new user  
+              $userInTeam->assign_role($team_id, $user_id ,$roleId); 
+              $response['message'] = 'Success';
+              $response['status'] = 200;
+              echo json_encode($response);
+
             }
             else 
             {
