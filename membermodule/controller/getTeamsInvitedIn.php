@@ -20,6 +20,7 @@ if(isset($data['user_email']) && (!filter_var($data['user_email'], FILTER_VALIDA
     $response['message'] = 'success';
     $response['status'] = 200;
     $response['data']=$result;
+         //var_dump($response['data']); exit;
     echo json_encode($response);
 }
 

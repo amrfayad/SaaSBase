@@ -2,6 +2,7 @@
 
 include_once './models/User.php';
 include_once './models/User_Team.php';
+include_once './models/InvitedUser.php';
 
 $user_email = $data['email'];
 $user_password = sha1($data['pass']);
@@ -32,26 +33,29 @@ if((filter_var($data['team_id'], FILTER_VALIDATE_INT) === false))
 {
  $response['message'] = 'failed, Team id only integer value';
  $response['status'] = 400;
- echo json_encode($response)	
+ echo json_encode($response);
 }
 else{
 $user_id = $user->getUserId($user_email,$user_password);
 if($user_id == -1)
 {
-    $response['message'] = 'failed, Invaild Email or password';
+    $response['message'] = 'failed, Invalid Email or password';
     $response['status'] = 400;
     echo json_encode($response);
 }else{
     
-    //check invation already Exist for this user
-    if($invite_user->CheckInvation($team_id,$user_name) == 1)
+    //check invitation already Exist for this user
+    if($invite_user->CheckInvation($team_id,$user_email) == 1)
     {
     $user_team->accept_invitation($user_id,$team_id);
+        $response['message'] = 'Accept Invitation Successfully';
+        $response['status'] = 200;
+        echo json_encode($response);
     $invite_user->removeInvation($team_id,$user_email);
 }
 else
 {
-   $response['message'] = 'failed, Invation not Exist';
+   $response['message'] = 'failed, Invitation not Exist';
     $response['status'] = 400;
     echo json_encode($response); 
 }
