@@ -1,7 +1,6 @@
 <?php
 
 include_once './models/User.php';
-include_once './models/User_Team.php';
 include_once './models/InvitedUser.php';
 
 $user_email = $data['email'];
@@ -10,7 +9,6 @@ $team_id = $data['team_id'];
 
 //declaration section
 $user = new User();
-$user_team = new User_Team();
 $invite_user=new InvitedUSer();
 
 //declartion response
@@ -47,9 +45,8 @@ if($user_id == -1)
     //check invitation already Exist for this user
     if($invite_user->CheckInvation($team_id,$user_email) == 1)
     {
-        $user_team->accept_invitation($user_id,$team_id);
-        $invite_user->removeInvation($team_id,$user_email);
-        $response['message'] = 'Accept Invitation Successfully';
+        $invite_user->removeInvation($user_id,$team_id);
+        $response['message'] = 'Invitation Deleted Successfully';
         $response['status'] = 200;
         echo json_encode($response);
 }
