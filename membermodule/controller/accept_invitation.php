@@ -18,9 +18,7 @@ $response = array();
 
 if($user_email != null && $user_password !=null && $team_id != null)
 {
-   
-
-if((filter_var($data['email'], FILTER_VALIDATE_EMAIL) === false))
+   if((filter_var($data['email'], FILTER_VALIDATE_EMAIL) === false))
 	{
       $response['message'] = 'failed, Error in Email Format';
       $response['status'] = 400;
@@ -81,7 +79,7 @@ else if($team_id == null )
     echo json_encode($response);
 	}
 
-	if($user_password == null )
+  else if($user_password == null )
 	{
     $response['message'] = 'failed, Email cannot be Empty';
     $response['status'] = 400;
