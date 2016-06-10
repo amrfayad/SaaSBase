@@ -21,8 +21,6 @@ $role = new Role();
 $response = array();
 if(isset($data['team_id']) && isset($data['pass']) && isset($data['user_id']))
 {
-    $role_name="billing";
-    $roleId=$role->getRoleId($role_name);
     //echo $roleId; exit; 2
     $admin_id = $team->getTeamAdmin($team_id);
     //echo $admin_id; exit; 9
@@ -46,6 +44,8 @@ if(isset($data['team_id']) && isset($data['pass']) && isset($data['user_id']))
                  { 
                           
                 // assign billing to new user  
+              $role_name="billing";
+              $roleId=$role->getRoleId($role_name);   
               $userInTeam->assign_role($team_id, $user_id ,$roleId); 
               $response['message'] = 'Success';
               $response['status'] = 200;
