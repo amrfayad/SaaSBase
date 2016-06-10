@@ -39,14 +39,14 @@ function CheckInvation($team_id, $email)
  }
 
 
-function removeInvation($team_id,$email)
+function removeInvation($user_id,$team_id)
 {
         try {
                 $connection = Database::connect();
                 if (!$connection) {
                       die('Error:' . mysqli_connect_error());
                 }
-                $query = "delete from invitedUsers where user_email='$email' and teams_team_id = '$team_id'";
+                $query = "delete from invitedUsers where id=$user_id and teams_team_id = '$team_id'";
                 mysqli_query($connection, $query);
           }
           catch (Exception $e)
@@ -88,7 +88,7 @@ function getTeamsUserInvitedIn($user_email)
             $query = "select id from invitedUsers where user_email='$email' and teams_team_id=$team_id ";
             $result = mysqli_query($connection, $query);
             while ($row = mysqli_fetch_assoc($result)) {
-                return $row['user_id'];
+                return $row['id'];
             }
             return -1;
         } catch (Exception $ex) {

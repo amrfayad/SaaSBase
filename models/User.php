@@ -129,6 +129,7 @@ class User {
         }
     }
     #AyaEMahmoud
+
     function getUserId($email,$password) {
         try {
             $connection = Database::connect();
@@ -136,11 +137,17 @@ class User {
                 die('Error in connection  return user id');
             }
             $query = "select user_id from users where user_email='$email' and  password='$password'";
+
             $result = mysqli_query($connection, $query);
-            while ($row = mysqli_fetch_assoc($result)) {
+            $row=mysql_fetch_assoc($result);
+              if($row)
+              {
                 return $row['user_id'];
             }
+              else
+              {
             return -1;
+            
         } catch (Exception $ex) {
             echo $ex->getMessage();
         }
