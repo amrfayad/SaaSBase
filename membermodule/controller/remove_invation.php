@@ -16,7 +16,6 @@ $response = array();
 
 if($user_email != null && $user_password !=null && $team_id != null)
 {
-   
 
 if((filter_var($data['email'], FILTER_VALIDATE_EMAIL) === false))
 	{
