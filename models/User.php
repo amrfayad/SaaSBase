@@ -147,6 +147,7 @@ class User {
                 return -1;
 
             }
+
         }
         catch
             (Exception $ex) {

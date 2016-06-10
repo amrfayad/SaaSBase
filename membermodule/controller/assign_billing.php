@@ -21,10 +21,15 @@ $response = array();
 
 if(isset($data['team_id']) && isset($data['pass']) && $data['pass'] != null && isset($data['user_id'])) {
     $admin_id = $team->getTeamAdmin($team_id);
-    $isAdmin = $user->checkTeamAdminPassword($admin_password,$admin_id);
-    if ($isAdmin == 1) {
-
-            //check user already exist in This Team
+    $isAdmin = $user->checkTeamAdminPassword($admin_password ,$admin_id);
+    if ($isAdmin ==1 ) {
+        // get current billing user
+        $billing_user_id = $userInTeam->get_billing_user($team_id, 2);
+        if ($billing_user_id != null) {
+            $role_name = "normal";
+            $roleId = $role->getRoleId($role_name);
+            $userInTeam->assign_role($team_id, $billing_user_id,1);
+        }
             $checkUSer = $user->checkUserInTeam($user_id, $team_id);
             if ($checkUSer == 1) {
 
