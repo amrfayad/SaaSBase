@@ -1,7 +1,6 @@
 <?php
 
 include_once './models/User.php';
-include_once './models/User_Team.php';
 include_once './models/InvitedUser.php';
 
 $user_email = $data['email'];
@@ -10,7 +9,6 @@ $team_id = $data['team_id'];
 
 //declaration section
 $user = new User();
-$user_team = new User_Team();
 $invite_user=new InvitedUSer();
 
 //declartion response
@@ -18,7 +16,9 @@ $response = array();
 
 if($user_email != null && $user_password !=null && $team_id != null)
 {
-   if((filter_var($data['email'], FILTER_VALIDATE_EMAIL) === false))
+   
+
+if((filter_var($data['email'], FILTER_VALIDATE_EMAIL) === false))
 	{
       $response['message'] = 'failed, Error in Email Format';
       $response['status'] = 400;
@@ -45,9 +45,9 @@ if($user_id == -1)
     //check invitation already Exist for this user
     if($invite_user->CheckInvation($team_id,$user_email) == 1)
     {
-        $user_team->accept_invitation($user_id,$team_id);
-        $invite_user->removeInvation($team_id,$user_email);
-        $response['message'] = 'Accept Invitation Successfully';
+        $userId=$invite_user->getInvitedUserId($user_email,$team_id);
+        $invite_user->removeInvation($userId,$team_id);
+        $response['message'] = 'Invitation Deleted Successfully';
         $response['status'] = 200;
         echo json_encode($response);
 }
@@ -79,7 +79,7 @@ else if($team_id == null )
     echo json_encode($response);
 	}
 
-  else if($user_password == null )
+	if($user_password == null )
 	{
     $response['message'] = 'failed, Email cannot be Empty';
     $response['status'] = 400;
