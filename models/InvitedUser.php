@@ -77,7 +77,7 @@ function getTeamsUserInvitedIn($user_email)
               }	
   }
 
-  function getInvitedUserId($user_email,$team_id)
+  function getInvitedUserId($email,$team_id)
   {
 
      try {

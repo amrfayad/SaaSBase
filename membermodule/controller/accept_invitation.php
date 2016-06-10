@@ -45,8 +45,9 @@ if($user_id == -1)
     //check invitation already Exist for this user
     if($invite_user->CheckInvation($team_id,$user_email) == 1)
     {
+        //echo $user_id; echo $team_id; echo $user_email; exit;
         $user_team->accept_invitation($user_id,$team_id);
-        $invite_user->removeInvation($team_id,$user_email);
+        $invite_user->removeInvation($user_id,$team_id);
         $response['message'] = 'Accept Invitation Successfully';
         $response['status'] = 200;
         echo json_encode($response);
