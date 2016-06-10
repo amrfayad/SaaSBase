@@ -1,5 +1,4 @@
 <?php
-include_once './models/User.php';
 include_once './models/Team.php';
 
 //initalize object 
