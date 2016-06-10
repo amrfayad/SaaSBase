@@ -45,7 +45,8 @@ if($user_id == -1)
     //check invitation already Exist for this user
     if($invite_user->CheckInvation($team_id,$user_email) == 1)
     {
-        $invite_user->removeInvation($user_id,$team_id);
+        $userId=$invite_user->getInvitedUserId($user_email,$team_id);
+        $invite_user->removeInvation($userId,$team_id);
         $response['message'] = 'Invitation Deleted Successfully';
         $response['status'] = 200;
         echo json_encode($response);

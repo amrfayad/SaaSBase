@@ -76,4 +76,23 @@ function getTeamsUserInvitedIn($user_email)
                   echo $e->getMessage();
               }	
   }
+
+  function getInvitedUserId($user_email,$team_id)
+  {
+
+     try {
+            $connection = Database::connect();
+            if (!$connection) {
+                die('Error in connection  return user id');
+            }
+            $query = "select id from invitedUsers where user_email='$email' and teams_team_id=$team_id ";
+            $result = mysqli_query($connection, $query);
+            while ($row = mysqli_fetch_assoc($result)) {
+                return $row['user_id'];
+            }
+            return -1;
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
+  }
 }
