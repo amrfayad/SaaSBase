@@ -36,7 +36,7 @@ if((filter_var($data['team_id'], FILTER_VALIDATE_INT) === false))
  echo json_encode($response);
 }
 else{
-$user_id = $user->getUserId($user_email,$user_password);
+$user_id = $user->getUserId($user_email,$team_id);
 if($user_id == -1)
 {
     $response['message'] = 'failed, Invalid Email or password';

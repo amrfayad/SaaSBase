@@ -129,16 +129,16 @@ class User {
         }
     }
     #AyaEMahmoud
-    function getUserId($email, $password) {
+    function getUserId($email,$team_id) {
         try {
             $connection = Database::connect();
             if (!$connection) {
                 die('Error in connection  return user id');
             }
-            $query = "select user_id from users where user_email='$email' and password='$password'";
+            $query = "select id from invitedUsers where user_email='$email'and teams_team_id=$team_id";
             $result = mysqli_query($connection, $query);
             while ($row = mysqli_fetch_assoc($result)) {
-                return $row['user_id'];
+                return $row['id'];
             }
             return -1;
         } catch (Exception $ex) {
