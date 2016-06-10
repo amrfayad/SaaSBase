@@ -147,8 +147,9 @@ class User {
               else
               {
             return -1;
-            
-        } catch (Exception $ex) {
+
+        } 
+    }catch (Exception $ex) {
             echo $ex->getMessage();
         }
     }

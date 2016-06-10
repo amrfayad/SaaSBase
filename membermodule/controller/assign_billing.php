@@ -22,24 +22,15 @@ $response = array();
 
 if(isset($data['team_id']) && isset($data['pass']) && isset($data['user_id'])) {
     $admin_id = $team->getTeamAdmin($team_id);
-    //echo $admin_id; exit; 9
-    $isAdmin = $user->checkTeamAdminPassword($admin_id, $admin_password);
-    if ($isAdmin) {
+    $isAdmin = $user->checkTeamAdminPassword($admin_password ,$admin_id);
+    if ($isAdmin ==1 ) {
         // get current billing user
-        $billing_user_id = $userInTeam->get_billing_user($team_id, $roleId);
-        // echo $billing_user_id; exit;   8
+        $billing_user_id = $userInTeam->get_billing_user($team_id, 2);
         if ($billing_user_id != null) {
-            // assign previous billing user to be normal member
             $role_name = "normal";
             $roleId = $role->getRoleId($role_name);
-            $userInTeam->assign_role($team_id, $billing_user_id, $roleId);
+            $userInTeam->assign_role($team_id, $billing_user_id,1);
         }
-
-        $admin_id = $team->getTeamAdmin($team_id);
-        $isAdmin = $user->checkTeamAdminPassword($admin_id, $admin_password);
-        if ($isAdmin) {
-
-            //check user already exist in This Team
             $checkUSer = $user->checkUserInTeam($user_id, $team_id);
             if ($checkUSer == 1) {
 
@@ -64,7 +55,6 @@ if(isset($data['team_id']) && isset($data['pass']) && isset($data['user_id'])) {
             echo json_encode($response);
         }
     }
-}
 else
 {
 	if($team_id == null)
