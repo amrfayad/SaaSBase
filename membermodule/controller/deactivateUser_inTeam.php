@@ -16,11 +16,12 @@ $user_obj = new User_Team();
 //intalize 
 $response = array();
 
-if(isset($data['user_id'])&& isset($data['team_id'])&& isset($data['password']) && isset($data['admin_id']))
+if($user_id != null && $team_id !=null && $admin_password != null && $admin_id != null)
+
 {
 if (!filter_var($user_id, FILTER_VALIDATE_INT) === false)
 {
-if($admin_obj->checkTeamAdminPassword($admin_password,$data['admin_id']) == 1)
+if($admin_obj->checkTeamAdminPassword($admin_password,$admin_id) == 1)
 {
 $checkUserExist= $admin_obj->checkUserExist($user_id);
 if($checkUserExist == 1)

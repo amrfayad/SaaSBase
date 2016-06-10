@@ -139,7 +139,7 @@ class User {
             $query = "select user_id from users where user_email='$email' and  password='$password'";
 
             $result = mysqli_query($connection, $query);
-            $row=mysql_fetch_assoc($result);
+            $row=mysqli_fetch_assoc($result);
               if($row)
               {
                 return $row['user_id'];
@@ -193,7 +193,8 @@ class User {
                 die('Error: ' . mysqli_connect_error());
             }
 
-            $query = "select password from users where password = '$admin_password' and user_id = '$admin_id'";
+            $query = "select password from users where password = '$admin_password' 
+            and user_id = $admin_id";
             $result = mysqli_fetch_assoc(mysqli_query($connection, $query));
 
             if ($result) {
