@@ -2,6 +2,7 @@
 
 include_once './models/User.php';
 include_once './models/Plan.php';
+include_once './models/invoices.php';
 
 
 //initalize object 
@@ -21,21 +22,21 @@ if (isset($data['team_id']) && isset($data['plan_name'])) {
             if($team->checkTeam($data['team_id'])){
                 if($plan->getPlanId($data['plan_name']))
                 {
-            $plan_id=$plan->getPlanId($data['plan_name']);
-            $team->asignPlan($team_id,$plan_id);
-            //check other_info exist
-            if(isset($data['other_information']))
-            {
-                    //get other information data 
-                    $other_info=$data['other_information'];
-                    //Register History of invoices for team
-                    $invoice->addPayment($plan_name,$team_id,$other_info);
-            }
-            else
-            {
-                    $invoice->addPayment($plan_name,$team_id);
+                    $plan_id=$plan->getPlanId($data['plan_name']);
+                    $team->asignPlan($team_id,$plan_id);
+                    //check other_info exist
+                    if(isset($data['other_information']))
+                    {
+                            //get other information data 
+                            $other_info=$data['other_information'];
+                            //Register History of invoices for team
+                            $invoice->addPayment($plan_name,$team_id,$other_info);
+                    }
+                    else
+                    {
+                            $invoice->addPayment($plan_name,$team_id);
 
-            }
+                    }
 
             $response['message'] = 'success';
             $response['status'] = 200;

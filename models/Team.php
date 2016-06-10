@@ -207,7 +207,7 @@ catch (Exception $e)
             if (!$connection) {
                 die('Error: in connection Team');
             }
-            $query = "INSERT INTO `teams` (`payment_status`) VALUES ('0') ";
+            $query = "update teams set payment_status = 0 where team_id=$team_id";
             $result=mysqli_query($connection, $query);
             return $result;
         } catch (Exception $e) {
