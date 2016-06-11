@@ -29,6 +29,16 @@ USE `saasBase`;
 --
 
 DROP TABLE IF EXISTS `config`;
+DROP TABLE IF EXISTS `role_has_users_in_teams`;
+DROP TABLE IF EXISTS `users_in_teams`;
+DROP TABLE IF EXISTS `invitedUsers`;
+DROP TABLE IF EXISTS `invoices`;
+DROP TABLE IF EXISTS `role`;
+DROP TABLE IF EXISTS `teams`;
+DROP TABLE IF EXISTS `subscribtions`;
+DROP TABLE IF EXISTS `users`;
+
+
 CREATE TABLE IF NOT EXISTS `config` (
   `config_id` int(11) NOT NULL AUTO_INCREMENT,
   `config_name` varchar(45) DEFAULT NULL,
@@ -47,7 +57,7 @@ TRUNCATE TABLE `config`;
 -- Table structure for table `invitedUsers`
 --
 
-DROP TABLE IF EXISTS `invitedUsers`;
+
 CREATE TABLE IF NOT EXISTS `invitedUsers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_email` varchar(45) DEFAULT NULL,
@@ -67,7 +77,7 @@ TRUNCATE TABLE `invitedUsers`;
 -- Table structure for table `invoices`
 --
 
-DROP TABLE IF EXISTS `invoices`;
+
 CREATE TABLE IF NOT EXISTS `invoices` (
   `invoice_id` int(11) NOT NULL AUTO_INCREMENT,
   `subscr_name` varchar(45) DEFAULT NULL,
@@ -88,7 +98,7 @@ TRUNCATE TABLE `invoices`;
 -- Table structure for table `role`
 --
 
-DROP TABLE IF EXISTS `role`;
+
 CREATE TABLE IF NOT EXISTS `role` (
   `role_id` int(11) NOT NULL AUTO_INCREMENT,
   `role_name` varchar(45) DEFAULT NULL,
@@ -105,7 +115,7 @@ TRUNCATE TABLE `role`;
 -- Dumping data for table `role`
 --
 
-INSERT DELAYED IGNORE INTO `role` (`role_id`, `role_name`, `role_status`) VALUES
+INSERT INTO `role` (`role_id`, `role_name`, `role_status`) VALUES
 (1, 'normal', 1),
 (2, 'billing', 1);
 
@@ -115,7 +125,7 @@ INSERT DELAYED IGNORE INTO `role` (`role_id`, `role_name`, `role_status`) VALUES
 -- Table structure for table `role_has_users_in_teams`
 --
 
-DROP TABLE IF EXISTS `role_has_users_in_teams`;
+
 CREATE TABLE IF NOT EXISTS `role_has_users_in_teams` (
   `role_id` int(11) NOT NULL,
   `users_in_teams_user_id` int(11) NOT NULL,
@@ -136,7 +146,7 @@ TRUNCATE TABLE `role_has_users_in_teams`;
 -- Table structure for table `subscribtions`
 --
 
-DROP TABLE IF EXISTS `subscribtions`;
+
 CREATE TABLE IF NOT EXISTS `subscribtions` (
   `subscr_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
@@ -152,7 +162,7 @@ TRUNCATE TABLE `subscribtions`;
 -- Dumping data for table `subscribtions`
 --
 
-INSERT DELAYED IGNORE INTO `subscribtions` (`subscr_id`, `name`) VALUES
+INSERT  INTO `subscribtions` (`subscr_id`, `name`) VALUES
 (1, 'CRM Silver'),
 (2, 'CRM Gold');
 
@@ -162,7 +172,7 @@ INSERT DELAYED IGNORE INTO `subscribtions` (`subscr_id`, `name`) VALUES
 -- Table structure for table `teams`
 --
 
-DROP TABLE IF EXISTS `teams`;
+
 CREATE TABLE IF NOT EXISTS `teams` (
   `team_id` int(11) NOT NULL AUTO_INCREMENT,
   `users_user_id` int(11) NOT NULL,
@@ -184,7 +194,7 @@ TRUNCATE TABLE `teams`;
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
+
 CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(45) DEFAULT NULL,
@@ -207,7 +217,7 @@ TRUNCATE TABLE `users`;
 -- Table structure for table `users_in_teams`
 --
 
-DROP TABLE IF EXISTS `users_in_teams`;
+
 CREATE TABLE IF NOT EXISTS `users_in_teams` (
   `users_user_id` int(11) NOT NULL,
   `teams_team_id` int(11) NOT NULL,

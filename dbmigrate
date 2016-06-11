@@ -8,9 +8,9 @@ $db = new PDO("mysql:host=$mysql_host", $mysql_user, $mysql_password);
 $query = file_get_contents("saasBase.sql");
 $stmt = $db->prepare($query);
 if ($stmt->execute()){
-    echo "Data  Base succesfully Migrated";
+    echo "Data  Base succesfully Migrated\n";
 }
      
  else {
-     echo "Failed To migrate ";
+     echo "Failed To migrate\n ";
  }
