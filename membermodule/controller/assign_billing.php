@@ -19,7 +19,8 @@ $role = new Role();
 
 $response = array();
 
-if(isset($data['team_id']) && isset($data['pass']) && $data['pass'] != null && isset($data['user_id'])) {
+if(isset($data['team_id']) && isset($data['pass']) && $data['pass'] != null && isset($data['user_id']))
+{
     $admin_id = $team->getTeamAdmin($team_id);
     $isAdmin = $user->checkTeamAdminPassword($admin_password ,$admin_id);
     if ($isAdmin ==1 ) {
@@ -58,7 +59,16 @@ if(isset($data['team_id']) && isset($data['pass']) && $data['pass'] != null && i
     }
 else
 {
-	if($team_id == null)
+
+
+    if( $admin_password == null)
+    {
+        $response['message'] = 'failed, admin password empty data not applicable';
+        $response['status'] = 400;
+        echo json_encode($response);
+    }
+
+	else if($team_id == null)
 	{
      $response['message'] = 'failed,  team id empty data not applicable ';
      $response['status'] = 400;
@@ -71,12 +81,11 @@ else
      $response['status'] = 400;
      echo json_encode($response);
 	}
+    else{
+        $response['message'] = 'Enter yor password';
+        $response['status'] = 400;
+        echo json_encode($response);
+    }
 
-else if( $admin_password == null)
-	{
-     $response['message'] = 'failed, admin password empty data not applicable';
-     $response['status'] = 400;
-     echo json_encode($response);
-	}
 }
 ?>
