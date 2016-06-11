@@ -24,17 +24,21 @@ if(isset($data['team_id']) && isset($data['pass']) && $data['pass'] != null && i
     $isAdmin = $user->checkTeamAdminPassword($admin_password ,$admin_id);
     if ($isAdmin ==1 ) {
         // get current billing user
-        $billing_user_id = $userInTeam->get_billing_user($team_id, 2);
+            $role_name = "billing";
+            $roleId = $role->getRoleId($role_name);
+        $billing_user_id = $userInTeam->get_billing_user($team_id, $roleId);
         if ($billing_user_id != null) {
             $role_name = "normal";
             $roleId = $role->getRoleId($role_name);
-            $userInTeam->assign_role($team_id, $billing_user_id,1);
+            $userInTeam->assign_role($team_id, $billing_user_id,$roleId);
         }
             $checkUSer = $user->checkUserInTeam($user_id, $team_id);
             if ($checkUSer == 1) {
 
                 // assign billing to new user
-                $userInTeam->assign_role($team_id, $user_id,2);
+                $role_name = "billing";
+                $roleId = $role->getRoleId($role_name);
+                $userInTeam->assign_role($team_id, $user_id,$roleId);
                 $response['message'] = 'Success';
                 $response['status'] = 200;
                 echo json_encode($response);
