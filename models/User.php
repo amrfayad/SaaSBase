@@ -197,15 +197,10 @@ class User {
                 die('Error: ' . mysqli_connect_error());
             }
 
-<<<<<<< HEAD
             $query = "select password from users where password = '$admin_password' 
             and user_id = $admin_id";
             $result = mysqli_fetch_assoc(mysqli_query($connection, $query));
-=======
-            $query = "select password from users where password = '$admin_password'
-             and user_id = '$admin_id'";
-            $result = mysqli_query($connection, $query);
->>>>>>> cba6e8d0e8c0e2e08bafb4003f93f5a8c93b74bc
+
 
             if ($result) {
                 return 1;
