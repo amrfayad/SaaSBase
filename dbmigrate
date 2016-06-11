@@ -5,7 +5,7 @@ $mysql_user = $config['username'];
 $mysql_password = $config['password'];
 
 $db = new PDO("mysql:host=$mysql_host", $mysql_user, $mysql_password);
-$query = file_get_contents("DataBaseScheam.sql");
+$query = file_get_contents("saasBase.sql");
 $stmt = $db->prepare($query);
 if ($stmt->execute()){
     echo "Data  Base succesfully Migrated";
