@@ -47,7 +47,7 @@ if($user_id == -1)
     {
         //echo $user_id; echo $team_id; echo $user_email; exit;
         $user_team->accept_invitation($user_id,$team_id);
-        $invite_user->removeInvation($user_id,$team_id);
+        $invite_user->removeInvation($user_email,$team_id);
         $response['message'] = 'Accept Invitation Successfully';
         $response['status'] = 200;
         echo json_encode($response);
