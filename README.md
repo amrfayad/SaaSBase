@@ -31,7 +31,7 @@ step 2:
 
 step 3:
       
-      run script  ==> php .dbmigrate
+      run script  ==> php dbmigrate
       
       run command => sudo a2enmod rewrite    // enable rewrite mode
      
