@@ -47,6 +47,7 @@ if($user_id == -1)
     {
         //echo $user_id; echo $team_id; echo $user_email; exit;
         $user_team->accept_invitation($user_id,$team_id);
+        $user_team->assign_role_to_new_user($team_id,$user_id,1);
         $invite_user->removeInvation($user_email,$team_id);
         $response['message'] = 'Accept Invitation Successfully';
         $response['status'] = 200;

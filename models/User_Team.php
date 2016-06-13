@@ -166,5 +166,25 @@ class User_Team
         }
 
     }
+    
+    function assign_role_to_new_user($team_id,$user_id,$role_id){
+        try
+        {
+            $conection = Database::connect();
+            if (!$conection) {
+                die('Error: ' . mysqli_connect_error());
+            }
+            $query = "insert into role_has_users_in_teams values($role_id,$user_id,$team_id) ";
+            $result = mysqli_query($conection, $query);
+            
+            return $result ;
+        }
+        catch (Exception $e)
+        {
+                echo $e->getMessage();
+        }
+        return -1;
+        
+    }
 
 }

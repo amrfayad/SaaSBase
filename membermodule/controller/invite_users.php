@@ -24,17 +24,18 @@
         $json= array();
         while($counter < count($emails))
         {
-            $is_email_exists = $user->check_mail($emails[$counter]);
-            
-            if($inviteUser->CheckInvation($emails[$counter],$team_id) == 0 )
+            $email = preg_replace( "/\r|\n/", "", $emails[$counter] );
+            $is_email_exists = $user->check_mail($email);
+               
+            if($inviteUser->CheckInvation($email,$team_id) == 0 )
             {
-                $user->store_invited_users($emails[$counter],$team_id);
+                $user->store_invited_users($email,$team_id);
                 if($is_email_exists == 0){
-                    $json['invited_email']=$emails[$counter];
+                    $json['invited_email']=$email;
                     $json['url']="signup";
                 }
                 else{
-                    $json['invited_email']=$emails[$counter];
+                    $json['invited_email']=$email;
                     $json['url']="login";
                  }
             $list_of_invites[] = $json ;
