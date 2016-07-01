@@ -36,6 +36,7 @@ if(isset($data['token'])) {
             $response['message'] = 'Token has been expired';
             $response['status'] = 400;
     }
+        echo json_encode($response);   
 }
 else {
     $email = $data['email'];
